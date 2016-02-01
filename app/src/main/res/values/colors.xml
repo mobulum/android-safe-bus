@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#603693</color>
+    <color name="primary_dark">#8458BA</color>
+    <color name="primary_light">#AD99C5</color>
+    <color name="drawer_bg_selected">#f0e3ff</color>
+    <color name="accent">#AD99C5</color>
+
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#727272</color>
+
+    <color name="inactive_tab_text_color">#99ffffff</color>
+
+    <color name="divider">#B6B6B6</color>
+    <color name="windowBackground">#FFF</color>
+    <color name="white">#FFF</color>
+    <color name="form_background">#F1F5F8</color>
+    <color name="action">#FFED2960</color>
+    <color name="light_gray">#D3D3D3</color>
+</resources>

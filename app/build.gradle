@@ -1,0 +1,143 @@
+apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
+apply plugin: 'com.neenbedankt.android-apt'
+
+apply from: 'credentials.gradle'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
+
+    signingConfigs {
+        release {
+            storeFile file(System.getenv("ANDROID_KEY_STORE_FILE"))
+            storePassword System.getenv("ANDROID_KEY_STORE_PASSWORD")
+            keyAlias System.getenv("ANDROID_KEY_STORE_RECEIPTS_KEY_ALIAS")
+            keyPassword System.getenv("ANDROID_KEY_STORE_RECEIPTS_KEY_PASSWORD")
+        }
+    }
+
+    defaultConfig {
+        applicationId "tech.receipts.android"
+        minSdkVersion 16
+        targetSdkVersion 23
+        versionCode 900
+        versionName "0.9.0"
+        buildConfigField "boolean", "USE_CRASHLYTICS", "false"
+
+        buildConfigField 'String', 'SHARED_PREFS_PASSWORD', '"' + getSharedPrefsPassword() + '"'
+        buildConfigField 'String', 'API_LOGIN', '"' + getApiLogin() + '"'
+        buildConfigField 'String', 'API_PASSWORD', '"' + getApiPassword() + '"'
+        buildConfigField 'String', 'API_CLIENT', '"' + getApiClient() + '"'
+        buildConfigField 'String', 'API_CLIENT_PASSWORD', '"' + getApiClientPassword() + '"'
+    }
+
+    buildTypes {
+        debug {
+            applicationIdSuffix ".debug"
+            versionNameSuffix " Debug"
+            debuggable true
+        }
+
+        release {
+            minifyEnabled true
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "boolean", "USE_CRASHLYTICS", "true"
+        }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
+
+    lintOptions {
+        textReport true
+        textOutput 'stdout'
+        disable 'InvalidPackage', 'ResourceType'
+    }
+}
+
+configurations {
+    all*.exclude group: 'commons-logging', module: 'commons-logging'
+}
+
+dependencies {
+    final SUPPORT_LIBRARY_VERSION = '23.1.1'
+    final RETROFIT_VERSION = '2.0.0-beta3'
+    final OKHTTP_VERSION = '3.0.1'
+    final DAGGER_VERSION = '2.0.2'
+    final DEXMAKER_VERSION = '1.4'
+    final HAMCREST_VERSION = '1.4-atlassian-1'
+    final ESPRESSO_VERSION = '2.2.1'
+    final RUNNER_VERSION = '0.4.1'
+
+    def daggerCompiler = "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
+    def jUnit = "junit:junit:4.12"
+    def mockito = "org.mockito:mockito-core:1.10.19"
+
+    // App Dependencies
+    compile "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION"
+    compile "com.android.support:recyclerview-v7:$SUPPORT_LIBRARY_VERSION"
+    compile "com.android.support:cardview-v7:$SUPPORT_LIBRARY_VERSION"
+    compile "com.android.support:support-annotations:$SUPPORT_LIBRARY_VERSION"
+    compile "com.android.support:design:$SUPPORT_LIBRARY_VERSION"
+
+    compile 'com.squareup.sqlbrite:sqlbrite:0.5.0'
+    compile "com.squareup.okhttp3:okhttp:$OKHTTP_VERSION"
+    compile "com.squareup.okhttp3:logging-interceptor:$OKHTTP_VERSION"
+    compile "com.squareup.retrofit2:retrofit:$RETROFIT_VERSION"
+    compile "com.squareup.retrofit2:converter-gson:$RETROFIT_VERSION"
+    compile "com.squareup.retrofit2:adapter-rxjava:$RETROFIT_VERSION"
+
+    compile 'io.reactivex:rxandroid:1.1.0'
+    compile 'io.reactivex:rxjava:1.1.0'
+    compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'com.jakewharton.timber:timber:4.1.0'
+    compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
+        transitive = true;
+    }
+
+    compile('com.weiwangcn.betterspinner:library-material:1.1.0') {
+        exclude group: 'com.android.support', module: 'appcompat-v7'
+    }
+    compile 'com.jpardogo.materialtabstrip:library:1.1.0'
+
+    compile 'joda-time:joda-time:2.9.2'
+    compile 'org.apache.commons:commons-lang3:3.4'
+    compile 'commons-validator:commons-validator:1.5.0'
+
+    compile "com.google.dagger:dagger:$DAGGER_VERSION"
+    provided 'org.glassfish:javax.annotation:10.0-b28' //Required by Dagger2
+
+    // APT dependencies
+    apt daggerCompiler
+
+    // Instrumentation test dependencies
+    androidTestCompile jUnit
+    androidTestCompile mockito
+    androidTestCompile "com.android.support:support-annotations:$SUPPORT_LIBRARY_VERSION"
+    androidTestCompile("com.android.support.test.espresso:espresso-contrib:$ESPRESSO_VERSION") {
+        exclude group: 'com.android.support', module: 'appcompat'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'recyclerview-v7'
+    }
+    androidTestCompile "com.android.support.test.espresso:espresso-core:$ESPRESSO_VERSION"
+    androidTestCompile "com.android.support.test:runner:$RUNNER_VERSION"
+    androidTestCompile "com.android.support.test:rules:$RUNNER_VERSION"
+    androidTestCompile "com.crittercism.dexmaker:dexmaker:$DEXMAKER_VERSION"
+    androidTestCompile "com.crittercism.dexmaker:dexmaker-dx:$DEXMAKER_VERSION"
+    androidTestCompile "com.crittercism.dexmaker:dexmaker-mockito:$DEXMAKER_VERSION"
+
+    // Unit tests dependencies
+    testCompile jUnit
+    testCompile mockito
+    testCompile "org.hamcrest:hamcrest-core:$HAMCREST_VERSION"
+    testCompile "org.hamcrest:hamcrest-library:$HAMCREST_VERSION"
+    testCompile "org.hamcrest:hamcrest-integration:$HAMCREST_VERSION"
+    testCompile 'org.robolectric:robolectric:3.0'
+
+    testApt daggerCompiler
+    androidTestApt daggerCompiler
+}

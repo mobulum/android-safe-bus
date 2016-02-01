@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/form_background">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|enterAlways|snap"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/border"
+        android:padding="25dp"
+        android:layout_margin="10dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <com.rengwuxian.materialedittext.MaterialAutoCompleteTextView
+                    android:id="@+id/tax_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/input_hint_tax"
+                    android:inputType="number"
+                    android:lines="1"
+                    android:maxLength="10"
+                    android:nextFocusDown="@+id/pos_edit_text"
+                    android:singleLine="true"
+                    app:errorEnabled="true"
+                    app:met_floatingLabel="normal"
+                    app:met_floatingLabelText="@string/input_hint_tax"
+                    app:met_floatingLabelTextSize="17sp">
+
+                </com.rengwuxian.materialedittext.MaterialAutoCompleteTextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/create_ticket_form_vertical_padding"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <com.rengwuxian.materialedittext.MaterialAutoCompleteTextView
+                    android:id="@+id/pos_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/input_hint_pos"
+                    android:inputType=""
+                    android:lines="1"
+                    android:nextFocusDown="@+id/pon_edit_text"
+                    android:singleLine="true"
+                    app:errorEnabled="true"
+                    app:met_floatingLabel="normal"
+                    app:met_floatingLabelText="@string/input_hint_pos"
+                    app:met_floatingLabelTextSize="17sp">
+
+                </com.rengwuxian.materialedittext.MaterialAutoCompleteTextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/create_ticket_form_vertical_padding"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/pon_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/input_hint_pon"
+                    android:inputType="textNoSuggestions"
+                    android:lines="1"
+                    android:nextFocusDown="@+id/amount_edit_text"
+                    android:singleLine="true"
+                    app:errorEnabled="true"
+                    app:met_floatingLabel="normal"
+                    app:met_floatingLabelText="@string/input_hint_pon"
+                    app:met_floatingLabelTextSize="17sp">
+
+                </com.rengwuxian.materialedittext.MaterialEditText>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/create_ticket_form_vertical_padding"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/amount_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/input_hint_amount"
+                    android:inputType="numberDecimal"
+                    android:lines="1"
+                    android:nextFocusDown="@+id/trade_edit_text"
+                    android:singleLine="true"
+                    app:errorEnabled="true"
+                    app:met_floatingLabel="normal"
+                    app:met_floatingLabelText="@string/input_hint_amount"
+                    app:met_floatingLabelTextSize="17sp">
+
+                </com.rengwuxian.materialedittext.MaterialEditText>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/create_ticket_form_vertical_padding"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+                    android:id="@+id/trade_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/input_hint_trade"
+                    android:nextFocusDown="@+id/purchase_date_edit_text"
+                    app:errorEnabled="true"
+                    app:met_floatingLabel="normal"
+                    app:met_floatingLabelText="@string/input_hint_trade"
+                    app:met_floatingLabelTextSize="17sp"
+                    android:popupBackground="@color/white">
+
+                </com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/create_ticket_form_vertical_padding"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/purchase_date_edit_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/input_purchase_date"
+                    android:inputType="date"
+                    android:lines="1"
+                    android:singleLine="true"
+                    app:errorEnabled="true"
+                    app:met_floatingLabel="normal"
+                    app:met_floatingLabelText="@string/input_purchase_date"
+                    app:met_floatingLabelTextSize="17sp">
+
+                </com.rengwuxian.materialedittext.MaterialEditText>
+
+                <ImageButton
+                    android:id="@+id/pick_date_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/transparent_button"
+                    android:padding="8dp"
+                    android:contentDescription="@string/pick_date_description" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/create_ticket_form_vertical_padding"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/user_email_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/input_user_email"
+                    android:inputType="textEmailAddress"
+                    android:lines="1"
+                    android:nextFocusDown="@+id/user_phone_edit_text"
+                    android:singleLine="true"
+                    app:errorEnabled="true"
+                    app:met_floatingLabel="normal"
+                    app:met_floatingLabelText="@string/input_user_email"
+                    app:met_floatingLabelTextSize="17sp">
+
+                </com.rengwuxian.materialedittext.MaterialEditText>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/create_ticket_form_vertical_padding"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/user_phone_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/input_user_phone"
+                    android:inputType="phone"
+                    android:lines="1"
+                    android:maxLength="12"
+                    android:singleLine="true"
+                    app:errorEnabled="true"
+                    app:met_floatingLabel="normal"
+                    app:met_floatingLabelText="@string/input_user_phone"
+                    app:met_floatingLabelTextSize="17sp">
+
+                </com.rengwuxian.materialedittext.MaterialEditText>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/create_ticket_form_vertical_padding"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/terms_of_service_checkbox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/create_ticket_form_checkbox_padding_top_bottom"
+                    android:paddingTop="@dimen/create_ticket_form_checkbox_padding_top_bottom"
+                    android:text="@string/checkbox_service_terms">
+
+                </CheckBox>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/create_ticket_form_vertical_padding"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/personal_data_processing_checkbox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/create_ticket_form_checkbox_padding_top_bottom"
+                    android:paddingTop="@dimen/create_ticket_form_checkbox_padding_top_bottom"
+                    android:text="@string/checkbox_personal_data_processing">
+
+                </CheckBox>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/create_ticket_form_vertical_padding"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/use_my_effigy_checkbox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/create_ticket_form_circle_bottom_margin"
+                    android:text="@string/checkbox_use_my_effigy">
+
+                </CheckBox>
+            </LinearLayout>
+
+            <ViewAnimator
+                android:id="@+id/add_ticket_animator"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/create_ticket_form_vertical_padding"
+                android:layout_marginTop="@dimen/create_ticket_form_vertical_padding">
+
+                <Button
+                    android:id="@+id/add_ticket_button"
+                    style="@style/Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/post_add_ticket_form" />
+
+                <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center" />
+
+            </ViewAnimator>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.design.widget.CoordinatorLayout>

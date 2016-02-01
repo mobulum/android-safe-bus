@@ -1,0 +1,119 @@
+<resources>
+    <string name="app_name">Safe bus</string>
+    <string name="contact_email">android-app@receipts.tech</string>
+
+    <string name="close">Zamknij okno</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Anuluj</string>
+    <string name="yes">tak</string>
+    <string name="no">nie</string>
+    <string name="poland_phone_prefix">+48</string>
+
+    <string name="title_section_add_ticket">Dodaj paragon</string>
+    <string name="title_section_tickets_list">Lista dodanych paragonów</string>
+    <string name="title_section_results">Losowania</string>
+    <string name="title_section_options">Opcje</string>
+    <string name="title_section_rate">Oceń nas</string>
+    <string name="title_section_about">O programie</string>
+
+    <string name="input_hint_tax">Numer NIP podatnika</string>
+    <string name="input_hint_pos">Numer kasy rejestrującej</string>
+    <string name="input_hint_pon">Numer wydruku z paragonu</string>
+    <string name="input_hint_amount">Łączna kwota sprzedaży brutto</string>
+    <string name="input_hint_trade">Branża</string>
+    <string name="input_purchase_date">Data sprzedaży</string>
+    <string name="input_user_email">Adres email</string>
+    <string name="input_user_phone">Numer telefonu</string>
+    <string name="checkbox_service_terms">Akceptuję regulamin</string>
+    <string name="checkbox_personal_data_processing">Wyrażam zgodę na przetwarzanie moich danych</string>
+    <string name="checkbox_use_my_effigy">Wyrażam dobrowolną zgodę na wykorzystywanie mojego wizerunku</string>
+
+    <string name="other_enum_translation">Inne</string>
+
+    <string name="post_add_ticket_form">Weź udział w loterii</string>
+    <string name="button_check_if_win">Sprawdź czy wygrałeś</string>
+
+    <string name="loading_in_progress">Ładuję dane</string>
+    <string name="toast_invalid_user_credentials">Podane dane logowania są niepoprawne</string>
+    <string name="toast_success_created_ticket">Paragon został zgłoszony do loterii</string>
+    <string name="toast_no_winner_code">Niestety, żaden z Twoich paragonów nie jest na liście wylosowanych</string>
+    <string name="toast_found_winner_code">Gratulujemy! Na liście wylosowanych paragonów znajduje się Twój paragon: </string>
+    <string name="toast_found_winner_codes">Gratulujemy! Na liście wylosowanych paragonów znajduje się parę twoich paragonów: </string>
+
+    <string name="about_first_paragraph">Loteria paragonowa to aplikacja dedykowana wszystkim osobom pragnącym w prosty sposób zgłosić paragony do Narodowej Loterii Paragonowej. Pozwala ona na sprawdzenie dotychczas zgłoszonych paragonów oraz listę zwycięzców ostatniego losowania.</string>
+    <string name="about_second_paragraph">Dodatkowo zapamiętywane są wpisane numery NIP wystawiającego paragon oraz numery kas, aby poprzez proste podpowiedzi, wprowadzanie paragonów pochodzących z często odwiedzanych sklepów, było czystą przyjemnością, a nie żmudnym wpisywaniem znaków na klawiaturze.</string>
+    <string name="about_third_paragraph">Loteria prowadzona jest na zasadach określonych przez jej organizatorów (https://loteriaparagonowa.gov.pl/).</string>
+    <string name="about_fourth_paragraph">Aplikacja korzysta z otwartego API (https://receipts.tech).</string>
+    <string name="about_fifth_paragraph">Aplikacja pozwala zapamiętać lokalnie adres email, numer telefonu oraz hasło (opcjonalnie), w celu ułatwienia i przyspieszenia zgłaszania paragonów. Oprócz wymienionych, żadne inne dane osobiste użytkownika nie są przetwarzane.</string>
+    <string name="about_sixth_paragraph">Aplikacja prezentuje treści darmowo dostępne w sieci Internet. Developer nie rości sobie żadnych praw do treści prezentowanych w aplikacji.</string>
+    <string name="about_application_version">Wersja aplikacji: </string>
+    <string name="about_contact">Kontakt</string>
+
+    <string name="tickets_history_is_empty">Lista paragonów jest pusta</string>
+    <string name="results_is_empty">Lista losowań jest pusta</string>
+    <string name="progress_get_tickets">Pobieranie listy paragonów</string>
+    <string name="progress_get_results">Pobieranie listy losowań</string>
+    <string name="clear_autocomplete_label">Wyczyść podpowiedzi</string>
+    <string name="clear_user_data_label">Wyczyść dane użytkownika</string>
+    <string name="preferences_label">Ustawienia użytkownika</string>
+
+    <string name="toast_no_connection">Brak połączenia internetowego</string>
+    <string name="toast_connection_error">Błąd połączenia sieciowego</string>
+    <string name="toast_failed_get_token">Błąd uprawnień aplikacji</string>
+    <string name="toast_failed_create_ticket">Błąd dodawania paragonu</string>
+    <string name="toast_failed_get_tickets">Błąd pobierania paragonów</string>
+    <string name="toast_failed_get_trades">Błąd pobierania listy branży</string>
+    <string name="toast_failed_get_results">Błąd pobierania wyników losowań</string>
+    <string name="toast_failed_check_win_results">Błąd sprawdzania paragonów</string>
+
+    <string name="input_hint_result_prizes">Nagrody</string>
+    <string name="input_hint_result_date">Data</string>
+    <string name="input_hint_result_title">Wyniki losowania</string>
+
+    <string name="results_tab_upcoming">Nadchodzące</string>
+    <string name="results_tab_finished">Zakończone</string>
+
+
+    <string name="input_hint_login">Email</string>
+    <string name="input_hint_password">Hasło</string>
+    <string name="checkbox_store_user_data">Zapamiętaj dane w aplikacji</string>
+    <string name="login_form_title">Formularz logowania</string>
+    <string name="login_form_info">Uzupełnij dane w celu pobrania zapisanych paragonów</string>
+
+    <string name="checkbox_remember_dont_ask_again">Nie pytaj ponownie</string>
+    <string name="remember_form_title">Zapamiętaj dane</string>
+    <string name="remember_form_data_info">Czy chcesz przyspieszyć dodawanie kolejnych paragonów przez zapisanie następujących danych?</string>
+
+    <string name="pln_currency">zł</string>
+
+    <string name="tickets_card_10_2015">Październik 2015</string>
+    <string name="tickets_card_11_2015">Listopad 2015</string>
+    <string name="tickets_card_12_2015">Grudzień 2015</string>
+    <string name="tickets_card_01_2016">Styczeń 2016</string>
+    <string name="tickets_card_02_2016">Luty 2016</string>
+    <string name="tickets_card_03_2016">Marzec 2016</string>
+    <string name="tickets_card_04_2016">Kwiecień 2016</string>
+    <string name="tickets_card_05_2016">Maj 2016</string>
+    <string name="tickets_card_06_2016">Czerwiec 2016</string>
+    <string name="tickets_card_07_2016">Lipiec 2016</string>
+    <string name="tickets_card_08_2016">Sierpień 2016</string>
+    <string name="tickets_card_09_2016">Wrzesień 2016</string>
+    <string name="tickets_card_10_2016">Październik 2016</string>
+    <string name="tickets_specials">Branżowe</string>
+
+    <!-- validation messages -->
+    <string name="condition_msg_not_empty">Wprowadź wartość</string>
+    <string name="condition_msg_not_empty_selection">Dokonaj wyboru jednej z dostępnych wartości</string>
+    <string name="condition_msg_tax_registration_length">Prawidłowy numer NIP składa się z 10 znaków</string>
+    <string name="condition_msg_tax_registration_number">Błędny numer NIP</string>
+    <string name="condition_msg_pos_number">Błędny numer kasy rejestrującej</string>
+    <string name="condition_msg_email">Błędny adres email</string>
+    <string name="condition_msg_amount">Błędna kwota sprzedaży</string>
+    <string name="condition_msg_amount_min">Wymagana minimalna kwota sprzedaży 10 zł</string>
+    <string name="condition_msg_date">Błędna data sprzedaży</string>
+    <string name="condition_msg_date_current_month">Paragon musi być zgłoszony do loterii w miesiącu zakupu.</string>
+    <string name="condition_msg_phone">Błędny numer telefonu</string>
+    <string name="condition_msg_phone_poland">Numer telefonu musi zaczynać się od +48</string>
+    <string name="condition_msg_selected">Pole musi być zaznaczone</string>
+    <string name="pick_date_description">Przycisk wyboru daty</string>
+</resources>

@@ -1,0 +1,4 @@
+<resources>
+    <string name="clear_autocomplete">clear_autocomplete</string>
+    <string name="clear_user_data">clear_user_data</string>
+</resources>

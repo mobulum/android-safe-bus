@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_add_ticket"
+            android:checked="true"
+            android:icon="@drawable/ic_receipt_black_24dp"
+            android:title="@string/title_section_add_ticket" />
+        <item
+            android:id="@+id/nav_tickets_history"
+            android:checked="false"
+            android:checkable="false"
+            android:icon="@drawable/ic_history_black_24dp"
+            android:title="@string/title_section_tickets_list" />
+        <item
+            android:id="@+id/nav_results"
+            android:checked="false"
+            android:checkable="false"
+            android:icon="@drawable/ic_card_giftcard_black_24dp"
+            android:title="@string/title_section_results" />
+        <item
+            android:id="@+id/nav_options"
+            android:checked="false"
+            android:checkable="false"
+            android:icon="@drawable/ic_settings_black_24dp"
+            android:title="@string/title_section_options" />
+        <item
+            android:id="@+id/nav_rate"
+            android:checked="false"
+            android:checkable="false"
+            android:icon="@drawable/ic_star_black_24dp"
+            android:title="@string/title_section_rate" />
+        <item
+            android:id="@+id/nav_about"
+            android:checked="false"
+            android:checkable="false"
+            android:icon="@drawable/ic_info_black_24dp"
+            android:title="@string/title_section_about" />
+    </group>
+
+</menu>
