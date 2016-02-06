@@ -6,3 +6,4 @@
 *.iml
 /app/credential.properties
 app/release.keystore
+app/build/
