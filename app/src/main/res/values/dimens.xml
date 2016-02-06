@@ -1,0 +1,10 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+
+    <dimen name="create_ticket_form_vertical_padding">24dp</dimen>
+    <dimen name="create_ticket_form_checkbox_padding_top_bottom">20dp</dimen>
+    <dimen name="about_paragraph_vertical_margin">16dp</dimen>
+    <dimen name="about_paragraph_horizontal_margin">16dp</dimen>
+
+    <dimen name="create_ticket_form_circle_bottom_margin">8dp</dimen>
+</resources>
