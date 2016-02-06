@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">Bezpieczny autobus</string>
 
-    <string name="app_name">SampleAndroidApp</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
-
-    <string name="title_section_add_ticket">Dodaj paragon</string>
-    <string name="title_section_tickets_list">Lista dodanych paragonów</string>
-    <string name="title_section_results">Losowania</string>
+    <string name="title_section_bus_search">Wyszukaj autobus</string>
+    <string name="title_section_search_history">Historia wyszukiwania</string>
     <string name="title_section_options">Opcje</string>
     <string name="title_section_rate">Oceń nas</string>
     <string name="title_section_about">O programie</string>

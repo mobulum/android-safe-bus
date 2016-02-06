@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onNavigationDrawerItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
-            case R.id.nav_add_ticket: {
+            case R.id.nav_search_bus: {
                 break;
             }
 
