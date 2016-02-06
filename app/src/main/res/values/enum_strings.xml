@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- CarType enum values -->
+    <string name="car_type_unknown">nieznany</string>
+    <string name="car_type_car">samochód</string>
+    <string name="car_type_special_car">samochód specjalny</string>
+    <string name="car_type_other_car">samochód inny</string>
+    <string name="car_type_motorcycle">motocykl</string>
+    <string name="car_type_moped">motorower</string>
+    <string name="car_type_bus">autobus</string>
+    <string name="car_type_tractor">traktor</string>
+    <string name="car_type_light_trailer">lekka przyczepa</string>
+    <string name="car_type_heavy_trailer">ciężka przyczepa</string>
+    <string name="car_type_light_truck">lekka ciężarówka</string>
+
+    <!-- EventType enum values -->
+    <string name="timeline_change_owner">Zmiana właściciela</string>
+    <string name="timeline_deregistration">Wyrejestrowanie pojazdu</string>
+    <string name="timeline_inspection">Badanie techniczne</string>
+    <string name="timeline_production">Produkcja pojazdu</string>
+    <string name="timeline_registration">Zarejestrowanie pojazdu</string>
+    <string name="timeline_abroad_registration">Zarejestrowanie pojazdu za granicą</string>
+    <string name="timeline_changed_registration_location">Zmiana miejsca rejestracji</string>
+    <string name="timeline_co_owner">Dodanie współwłaściciela</string>
+    <string name="timeline_holder">Dodanie posiadacza</string>
+    <string name="timeline_stolen">Zgłoszenie kradzieży</string>
+    <string name="unknown">Nieznany</string>
+
+    <!-- CarKind enum values -->
+    <string name="car_kind_convertible">kabriolet</string>
+    <string name="car_kind_coupe">coupe</string>
+    <string name="car_kind_estate">kombi</string>
+    <string name="car_kind_hatchback">hatchback</string>
+    <string name="car_kind_hearse">karawan</string>
+    <string name="car_kind_limousine">limuzyna</string>
+    <string name="car_kind_other">inny</string>
+    <string name="car_kind_sedan">sedan</string>
+    <string name="car_kind_van">van</string>
+    <string name="car_kind_standard">osobowy</string>
+    <string name="car_kind_other_not_camping">inna z wyjątkiem kempingowych</string>
+    <string name="car_kind_wagon">furgon</string>
+    <string name="car_kind_wheeled">kołowy</string>
+    <string name="car_kind_cruiser">cruiser</string>
+    <string name="car_kind_off_road">off road</string>
+    <string name="car_kind_sport">sportowy</string>
+    <string name="car_kind_sport_touring">sportowo-turystyczny</string>
+    <string name="car_kind_touring">turystyczny</string>
+    <string name="car_kind_city">miejski</string>
+    <string name="car_kind_quad">quad</string>
+    <string name="car_kind_trailer">przyczepa</string>
+    <string name="car_kind_load_capacity_more_than_8_tons">o ładowności ponad 8t</string>
+    <string name="car_kind_load_capacity_of_8_tons">o ładowności 8t</string>
+    <string name="car_kind_load_capacity_of_2_tons">o ładowności 2t</string>
+    <string name="car_kind_cistern">cysterna</string>
+    <string name="car_kind_crane">dźwig</string>
+    <string name="car_kind_trolley">wywrotka</string>
+    <string name="car_kind_unknown">nieznany</string>
+
+    <!-- FuelType enum values -->
+    <string name="fuel_type_diesel">diesel</string>
+    <string name="fuel_type_electric">elektyczny</string>
+    <string name="fuel_type_etanol">etanol</string>
+    <string name="fuel_type_hybrid">hybrydowy</string>
+    <string name="fuel_type_hydrogen">hydrogen</string>
+    <string name="fuel_type_other">inny</string>
+    <string name="fuel_type_petrol">benzyna</string>
+    <string name="fuel_type_petrol_gas">benzyna/gaz</string>
+
+    <!-- InspectionStatus enum values -->
+    <string name="inspection_status_outdated">przedawnione</string>
+    <string name="inspection_status_up_to_date">aktualne</string>
+    <string name="inspection_status_unknown">nieznane</string>
+
+    <!-- PolicyStatus enum values -->
+    <string name="policy_status_outdated">przedawnione</string>
+    <string name="policy_status_up_to_date">aktualne</string>
+    <string name="policy_status_unknown">nieznane</string>
+
+    <!-- RegistrationStatus enum values -->
+    <string name="registration_status_registered">zarejestrowany</string>
+    <string name="registration_status_unregistered">wyrejestrowany</string>
+    <string name="registration_status_unknown">nieznany</string>
+
+    <!-- OwnerType enum values -->
+    <string name="owner_type_private">osoba prywatna</string>
+    <string name="owner_type_company">firma</string>
+
+</resources>
