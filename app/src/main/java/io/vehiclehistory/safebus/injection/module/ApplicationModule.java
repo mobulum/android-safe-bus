@@ -147,7 +147,7 @@ public class ApplicationModule {
                         .newBuilder()
                         .addHeader("Accept-language", "pl")
                         .addHeader("Authorization", authorization)
-                        .addHeader("User-Agent", "LotteryTickets;Android;" + BuildConfig.VERSION_NAME)
+                        .addHeader("User-Agent", "SafeBus;Android;" + BuildConfig.VERSION_NAME)
                         .build();
                 return chain.proceed(newRequest);
             }
