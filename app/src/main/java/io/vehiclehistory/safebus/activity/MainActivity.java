@@ -11,25 +11,63 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
+import javax.inject.Inject;
+
 import butterknife.Bind;
+import butterknife.ButterKnife;
 import io.vehiclehistory.safebus.BuildConfig;
 import io.vehiclehistory.safebus.R;
+import io.vehiclehistory.safebus.data.api.caller.GetVehicleHistoryCaller;
+import io.vehiclehistory.safebus.data.model.vehicle.VehicleResponse;
+import io.vehiclehistory.safebus.ui.view.VehicleMvpView;
+import timber.log.Timber;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity implements VehicleMvpView {
 
     @Bind(R.id.drawer_layout)
     protected DrawerLayout drawerLayout;
 
+    @Bind(R.id.nav_view)
+    protected NavigationView navigationView;
+
+    @Inject
+    protected GetVehicleHistoryCaller getVehicleHistoryPresenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        component().inject(this);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+
+        bindViews();
+        resetValues();
+
+        if (navigationView != null) {
+            setupDrawerContent(navigationView);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ButterKnife.unbind(this);
+        getVehicleHistoryPresenter.detachView();
+    }
+
+    private void bindViews() {
+        getVehicleHistoryPresenter.attachView(this);
+    }
+
+    private void resetValues() {
+        //TODO
     }
 
     public void onNavigationDrawerItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.nav_search_bus: {
+                getVehicleHistoryPresenter.getVehicleHistory("abc1234");
                 break;
             }
 
@@ -93,4 +131,38 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onVehicleFinished(VehicleResponse vehicleResponse) {
+
+    }
+
+    @Override
+    public void onErrorResponse(String message) {
+
+    }
+
+    @Override
+    public void onNoConnectionError() {
+
+    }
+
+    @Override
+    public void onRetryError() {
+
+    }
+
+    @Override
+    public void unableToGetTokenError() {
+
+    }
+
+    @Override
+    public void startedLoadingData() {
+
+    }
+
+    @Override
+    public void finishedLoadingData() {
+
+    }
 }

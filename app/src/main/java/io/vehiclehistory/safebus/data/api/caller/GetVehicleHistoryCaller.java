@@ -13,12 +13,12 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
 import rx.schedulers.Schedulers;
 
-public class GetTradesCaller extends BaseCaller<VehicleMvpView> {
+public class GetVehicleHistoryCaller extends BaseCaller<VehicleMvpView> {
 
     private String plate;
 
     @Inject
-    public GetTradesCaller(
+    public GetVehicleHistoryCaller(
             NetworkStateManager networkStateManager,
             DataManager dataManager,
             Retrofit retrofit
