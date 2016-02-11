@@ -2,15 +2,8 @@ package io.vehiclehistory.safebus.injection.module;
 
 import android.app.Application;
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.util.Base64;
-import android.view.LayoutInflater;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -30,15 +23,9 @@ import javax.net.ssl.X509TrustManager;
 import dagger.Module;
 import dagger.Provides;
 import io.vehiclehistory.safebus.BuildConfig;
-import io.vehiclehistory.safebus.components.NetworkStateManager;
-import io.vehiclehistory.safebus.components.ObscuredSharedPreferences;
 import io.vehiclehistory.safebus.config.ApplicationConfiguration;
 import io.vehiclehistory.safebus.config.AuthorizationConfiguration;
-import io.vehiclehistory.safebus.data.AuthProvider;
-import io.vehiclehistory.safebus.data.api.VehicleHistoryApiService;
 import io.vehiclehistory.safebus.data.api.auth.AuthApiService;
-import io.vehiclehistory.safebus.data.api.auth.AuthFromPasswordCaller;
-import io.vehiclehistory.safebus.data.api.auth.AuthFromRefreshTokenCaller;
 import io.vehiclehistory.safebus.data.model.Auth;
 import io.vehiclehistory.safebus.injection.ApplicationContext;
 import okhttp3.Interceptor;
@@ -46,15 +33,17 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.GsonConverterFactory;
-import retrofit2.Retrofit;
-import retrofit2.RxJavaCallAdapterFactory;
 import timber.log.Timber;
 
 /**
  * Provide application-level dependencies.
  */
-@Module
+@Module(includes = {
+        StorageModule.class,
+        SessionModule.class,
+        ServiceModule.class,
+        NetworkModule.class
+})
 public class ApplicationModule {
     private final Application application;
 
@@ -75,65 +64,7 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    SharedPreferences provideSharedPreferences() {
-        return new ObscuredSharedPreferences(
-                application, PreferenceManager.getDefaultSharedPreferences(application)
-        );
-    }
-
-    @Provides
-    @Singleton
-    LayoutInflater provideLayoutInflater() {
-        return (LayoutInflater) application.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-    }
-
-    @Provides
-    @Singleton
-    ConnectivityManager provideConnectivityManager() {
-        return (ConnectivityManager) application.getSystemService(Context.CONNECTIVITY_SERVICE);
-    }
-
-    @Provides
-    @Singleton
-    NetworkStateManager provideNetworkStateManager(ConnectivityManager connectivityManagerCompat) {
-        return new NetworkStateManager(connectivityManagerCompat);
-    }
-
-    @Provides
-    @Singleton
-    AuthProvider provideSessionHandler(AuthFromPasswordCaller authFromPasswordCaller, AuthFromRefreshTokenCaller authFromRefreshTokenCaller, SharedPreferences sharedPreferences, Retrofit retrofit, Auth auth) {
-        return new AuthProvider(authFromPasswordCaller, authFromRefreshTokenCaller, sharedPreferences, retrofit, auth);
-    }
-
-    @Provides
-    @Singleton
-    AuthFromPasswordCaller provideAuthFromPasswordProvider(AuthApiService authApiService, NetworkStateManager networkStateManager, Retrofit retrofit) {
-        return new AuthFromPasswordCaller(authApiService, networkStateManager, retrofit);
-    }
-
-    @Provides
-    @Singleton
-    AuthFromRefreshTokenCaller provideAuthFromRefreshTokenProvider(AuthApiService authApiService, NetworkStateManager networkStateManager, Retrofit retrofit) {
-        return new AuthFromRefreshTokenCaller(authApiService, networkStateManager, retrofit);
-    }
-
-    @Provides
-    @Singleton
-    Auth provideAuth() {
-        SharedPreferences sharedPreferences = provideSharedPreferences();
-        String accessToken = sharedPreferences.getString(AuthProvider.ACCESS_TOKEN, null);
-        String refreshToken = sharedPreferences.getString(AuthProvider.REFRESH_TOKEN, null);
-
-        Auth auth = new Auth();
-        auth.setAccessToken(accessToken);
-        auth.setRefreshToken(refreshToken);
-
-        return auth;
-    }
-
-    @Provides
-    @Singleton
-    OkHttpClient provideOkHttpClient() {
+    OkHttpClient provideOkHttpClient(final Auth auth) {
         Interceptor interceptor = new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
@@ -156,7 +87,7 @@ public class ApplicationModule {
             private String getAuthorization(Request request) throws IOException {
                 //default
 
-                String accessToken = provideAuth().getAccessToken();
+                String accessToken = auth.getAccessToken();
                 String authorization = AuthorizationConfiguration.BEARER_AUTHORIZATION + " " + accessToken;
 
                 Timber.d("request intercept for path: %s", request.url().encodedPath());
@@ -226,31 +157,5 @@ public class ApplicationModule {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }
-
-    @Provides
-    @Singleton
-    Retrofit provideRetrofit() {
-        Gson gson = new GsonBuilder()
-                .create();
-
-        return new Retrofit.Builder()
-                .baseUrl(ApplicationConfiguration.HOST)
-                .client(provideOkHttpClient())
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .build();
-    }
-
-    @Provides
-    @Singleton
-    AuthApiService provideAuthApiService() {
-        return provideRetrofit().create(AuthApiService.class);
-    }
-
-    @Provides
-    @Singleton
-   VehicleHistoryApiService provideReceiptsApiService() {
-        return provideRetrofit().create(VehicleHistoryApiService.class);
     }
 }

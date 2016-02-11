@@ -67,7 +67,7 @@ public class MainActivity extends BaseActivity implements VehicleMvpView {
     public void onNavigationDrawerItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.nav_search_bus: {
-                getVehicleHistoryPresenter.getVehicleHistory("abc1234");
+                getVehicleHistoryPresenter.getVehicleHistory("SBE12345");
                 break;
             }
 
