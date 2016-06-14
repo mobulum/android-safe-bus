@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary">#EEC666</color>
-    <color name="primary_dark">#D3AF5B</color>
+    <color name="primary">#4A798D</color>
+    <color name="primary_dark">#6FB5D3</color>
     <color name="primary_light">#AD99C5</color>
     <color name="drawer_bg_selected">#f0e3ff</color>
     <color name="accent">#AD99C5</color>
@@ -15,6 +15,6 @@
     <color name="windowBackground">#FFF</color>
     <color name="white">#FFF</color>
     <color name="form_background">#F1F5F8</color>
-    <color name="action">#FFED2960</color>
+    <color name="action">#6FB5D3</color>
     <color name="light_gray">#D3D3D3</color>
 </resources>

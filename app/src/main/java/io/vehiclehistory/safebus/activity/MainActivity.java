@@ -9,6 +9,8 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import javax.inject.Inject;
@@ -25,11 +27,8 @@ import timber.log.Timber;
 
 public class MainActivity extends BaseActivity implements VehicleMvpView {
 
-    @Bind(R.id.drawer_layout)
-    protected DrawerLayout drawerLayout;
-
-    @Bind(R.id.nav_view)
-    protected NavigationView navigationView;
+    @Bind(R.id.toolbar)
+    protected Toolbar toolbar;
 
     @Inject
     protected GetVehicleHistoryCaller getVehicleHistoryPresenter;
@@ -44,9 +43,9 @@ public class MainActivity extends BaseActivity implements VehicleMvpView {
         bindViews();
         resetValues();
 
-        if (navigationView != null) {
-            setupDrawerContent(navigationView);
-        }
+        // Sets the Toolbar to act as the ActionBar for this Activity window.
+        // Make sure the toolbar exists in the activity and is not null
+        setSupportActionBar(toolbar);
     }
 
     @Override
@@ -80,19 +79,19 @@ public class MainActivity extends BaseActivity implements VehicleMvpView {
         }
     }
 
+    // Menu icons are inflated just as they were with actionbar
     @Override
-    public void onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START))
-            drawerLayout.closeDrawer(GravityCompat.START);
-        else
-            super.onBackPressed();
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                drawerLayout.openDrawer(GravityCompat.START);
+
                 return true;
         }
 
@@ -116,7 +115,7 @@ public class MainActivity extends BaseActivity implements VehicleMvpView {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
                         onNavigationDrawerItemSelected(menuItem);
-                        drawerLayout.closeDrawers();
+
                         return true;
                     }
                 });

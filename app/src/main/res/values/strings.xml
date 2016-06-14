@@ -8,4 +8,10 @@
     <string name="title_section_rate">Oceń nas</string>
     <string name="title_section_about">O programie</string>
 
+    <string name="main_plate">Numer rejestracyjny</string>
+    <string name="main_search">wyszukaj</string>
+    <string name="main_encourage">Wprowadź numer rejestracyjny autobusu i sprawdź, czy pojazd którym podróżujesz posiada ważne badanie techniczne.</string>
+
+    <string name="menu_rate">oceń aplikację</string>
+    <string name="menu_about">o aplikacji</string>
 </resources>
