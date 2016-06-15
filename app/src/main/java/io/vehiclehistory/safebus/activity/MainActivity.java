@@ -1,6 +1,7 @@
 package io.vehiclehistory.safebus.activity;
 
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,6 +13,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import javax.inject.Inject;
 
@@ -30,6 +34,9 @@ public class MainActivity extends BaseActivity implements VehicleMvpView {
     @Bind(R.id.toolbar)
     protected Toolbar toolbar;
 
+    @Bind(R.id.findBus)
+    protected Button findBusButton;
+
     @Inject
     protected GetVehicleHistoryCaller getVehicleHistoryPresenter;
 
@@ -42,7 +49,7 @@ public class MainActivity extends BaseActivity implements VehicleMvpView {
 
         bindViews();
         resetValues();
-
+        setupSearchButton();
         // Sets the Toolbar to act as the ActionBar for this Activity window.
         // Make sure the toolbar exists in the activity and is not null
         setSupportActionBar(toolbar);
@@ -63,20 +70,20 @@ public class MainActivity extends BaseActivity implements VehicleMvpView {
         //TODO
     }
 
-    public void onNavigationDrawerItemSelected(MenuItem menuItem) {
-        switch (menuItem.getItemId()) {
-            case R.id.nav_search_bus: {
-                getVehicleHistoryPresenter.getVehicleHistory("SBE12345");
-                break;
+    private void setupSearchButton() {
+        findBusButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                //clearErrors();
+                validateAndPerformSearch();
             }
 
-            case R.id.nav_rate:
-                showMarketAppIn();
-                break;
+        });
+    }
 
-            default:
-
-        }
+    private void validateAndPerformSearch() {
+        getVehicleHistoryPresenter.getVehicleHistory("SBE12345");
     }
 
     // Menu icons are inflated just as they were with actionbar
@@ -98,29 +105,6 @@ public class MainActivity extends BaseActivity implements VehicleMvpView {
         return super.onOptionsItemSelected(item);
     }
 
-    private void disableNavigationViewScrollbars(NavigationView navigationView) {
-        if (navigationView != null) {
-            NavigationMenuView navigationMenuView = (NavigationMenuView) navigationView.getChildAt(0);
-            if (navigationMenuView != null) {
-                navigationMenuView.setVerticalScrollBarEnabled(false);
-            }
-        }
-    }
-
-    private void setupDrawerContent(NavigationView navigationView) {
-        disableNavigationViewScrollbars(navigationView);
-        navigationView.getMenu().getItem(0).setChecked(true);
-        navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        onNavigationDrawerItemSelected(menuItem);
-
-                        return true;
-                    }
-                });
-    }
-
     private void showMarketAppIn() {
         try {
             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + BuildConfig.APPLICATION_ID)));
@@ -131,17 +115,20 @@ public class MainActivity extends BaseActivity implements VehicleMvpView {
     }
 
     @Override
-    public void onVehicleFinished(VehicleResponse vehicleResponse) {
-
+    public void onVehicleFinished(VehicleResponse response) {
+        Intent i = new Intent(this, BusActivity.class);
+        i.putExtra(BusActivity.BUS_RESPONSE_KEY, response);
+        startActivity(i);
     }
 
     @Override
     public void onErrorResponse(String message) {
-
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onNoConnectionError() {
+        Toast.makeText(getApplicationContext(), "No conneciton", Toast.LENGTH_SHORT).show();
 
     }
 
