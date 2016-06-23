@@ -1,21 +1,21 @@
 package io.vehiclehistory.safebus.activity;
 
 import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.internal.NavigationMenuView;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
+import android.os.Handler;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
+import android.widget.ViewAnimator;
+
+import com.rengwuxian.materialedittext.MaterialEditText;
 
 import javax.inject.Inject;
 
@@ -26,10 +26,12 @@ import io.vehiclehistory.safebus.R;
 import io.vehiclehistory.safebus.data.api.caller.GetVehicleHistoryCaller;
 import io.vehiclehistory.safebus.data.model.vehicle.VehicleResponse;
 import io.vehiclehistory.safebus.ui.view.VehicleMvpView;
-import timber.log.Timber;
 
 
 public class MainActivity extends BaseActivity implements VehicleMvpView {
+
+    private static final int ANIMATOR_BUTTON = 0;
+    private static final int ANIMATOR_PROGRESS = 1;
 
     @Bind(R.id.toolbar)
     protected Toolbar toolbar;
@@ -37,8 +39,19 @@ public class MainActivity extends BaseActivity implements VehicleMvpView {
     @Bind(R.id.findBus)
     protected Button findBusButton;
 
+    @Bind(R.id.busPlate)
+    protected EditText busPlate;
+
+    @Bind(R.id.find_bus_animator)
+    protected ViewAnimator findBusAnimator;
+
+    @Bind(R.id.input_layout)
+    protected CardView inputLayout;
+
     @Inject
     protected GetVehicleHistoryCaller getVehicleHistoryPresenter;
+
+    private final Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +66,8 @@ public class MainActivity extends BaseActivity implements VehicleMvpView {
         // Sets the Toolbar to act as the ActionBar for this Activity window.
         // Make sure the toolbar exists in the activity and is not null
         setSupportActionBar(toolbar);
+
+        busPlate.setText("SBE12345");
     }
 
     @Override
@@ -82,8 +97,26 @@ public class MainActivity extends BaseActivity implements VehicleMvpView {
         });
     }
 
+    private String getValidatedInput() throws IllegalArgumentException {
+        String plate = busPlate.getText().toString();
+        if (plate.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+        return plate;
+    }
+
     private void validateAndPerformSearch() {
-        getVehicleHistoryPresenter.getVehicleHistory("SBE12345");
+        try {
+            getVehicleHistoryPresenter.getVehicleHistory(getValidatedInput());
+            setUiLocked(true);
+            setButtonAnimator(ANIMATOR_PROGRESS);
+        } catch (IllegalArgumentException e) {
+            handleValidationIssues();
+        }
+    }
+
+    private void handleValidationIssues() {
+        Toast.makeText(getApplicationContext(), "Wpisz tablice", Toast.LENGTH_SHORT).show();
     }
 
     // Menu icons are inflated just as they were with actionbar
@@ -138,17 +171,28 @@ public class MainActivity extends BaseActivity implements VehicleMvpView {
     }
 
     @Override
-    public void unableToGetTokenError() {
-
-    }
-
-    @Override
-    public void startedLoadingData() {
-
-    }
-
-    @Override
     public void finishedLoadingData() {
+        setButtonAnimator(ANIMATOR_BUTTON);
+        setUiLocked(false);
+    }
 
+    private void setUiLocked(final boolean locked) {
+        this.handler.post(new Runnable() {
+
+            @Override
+            public void run() {
+                inputLayout.setEnabled(!locked);
+            }
+        });
+    }
+
+    private void setButtonAnimator(final int childPosition) {
+        this.handler.post(new Runnable() {
+
+            @Override
+            public void run() {
+                findBusAnimator.setDisplayedChild(childPosition);
+            }
+        });
     }
 }

@@ -13,10 +13,5 @@ public interface MvpView {
 
     void onRetryError();
 
-    void unableToGetTokenError();
-
-    void startedLoadingData();
-
     void finishedLoadingData();
-
 }

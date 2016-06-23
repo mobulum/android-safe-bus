@@ -58,6 +58,7 @@ public class GetVehicleHistoryCaller extends BaseCaller<VehicleMvpView> {
                     @Override
                     public void onNext(VehicleResponse vehicleResponse) {
                         getMvpView().onVehicleFinished(vehicleResponse);
+                        getMvpView().finishedLoadingData();
                     }
                 });
     }
