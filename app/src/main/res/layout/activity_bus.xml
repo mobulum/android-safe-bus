@@ -51,45 +51,30 @@
                         android:layout_width="match_parent">
                         <TextView
                             android:text="Producent"
-                            android:layout_weight="1"
-                            android:padding="10dip"
-                            android:gravity="right"/>
+                            style="@style/BusLabel"/>
                         <TextView
                             android:id="@+id/bus_make"
-                            android:text="-"
-                            android:layout_weight="2"
-                            android:padding="10dip"
-                            android:gravity="left"/>
+                            style="@style/BusValue"/>
                     </TableRow>
                     <TableRow
                         android:layout_height="wrap_content"
                         android:layout_width="match_parent">
                         <TextView
                             android:text="Model"
-                            android:layout_weight="1"
-                            android:padding="10dip"
-                            android:gravity="right"/>
+                            style="@style/BusLabel"/>
                         <TextView
                             android:id="@+id/bus_model"
-                            android:text="-"
-                            android:layout_weight="2"
-                            android:padding="10dip"
-                            android:gravity="left"/>
+                            style="@style/BusValue"/>
                     </TableRow>
                     <TableRow
                         android:layout_height="wrap_content"
                         android:layout_width="match_parent">
                         <TextView
                             android:text="Rok produkcji"
-                            android:layout_weight="1"
-                            android:padding="10dip"
-                            android:gravity="right"/>
+                            style="@style/BusLabel"/>
                         <TextView
                             android:id="@+id/bus_production"
-                            android:text="-"
-                            android:layout_weight="2"
-                            android:padding="10dip"
-                            android:gravity="left"/>
+                            style="@style/BusValue"/>
                     </TableRow>
                 </TableLayout>
             </android.support.v7.widget.CardView>
@@ -108,15 +93,15 @@
                         android:layout_width="match_parent">
                         <TextView
                             android:text="Badanie techniczne"
-                            android:layout_weight="1"
-                            android:padding="10dip"
-                            android:gravity="right"/>
+                            style="@style/BusLabel"/>
                         <ImageView android:id="@+id/bus_inspection_icon_positive"
                             android:src="@drawable/ic_check_black_48dp"
+                            android:tint="@color/icon_green"
                             android:layout_weight="2"
                             android:gravity="left"/>
                         <ImageView android:id="@+id/bus_inspection_icon_negative"
                             android:src="@drawable/ic_warning_black_48dp"
+                            android:tint="@color/icon_red"
                             android:layout_weight="2"
                             android:gravity="left"/>
                     </TableRow>
@@ -125,15 +110,15 @@
                         android:layout_width="match_parent">
                         <TextView
                             android:text="Status rejestracji"
-                            android:layout_weight="1"
-                            android:padding="10dip"
-                            android:gravity="right"/>
+                            style="@style/BusLabel"/>
                         <ImageView android:id="@+id/bus_registration_icon_positive"
                             android:src="@drawable/ic_check_black_48dp"
+                            android:tint="@color/icon_green"
                             android:layout_weight="2"
                             android:gravity="left"/>
                         <ImageView android:id="@+id/bus_registration_icon_negative"
                             android:src="@drawable/ic_warning_black_48dp"
+                            android:tint="@color/icon_red"
                             android:layout_weight="2"
                             android:gravity="left"/>
                     </TableRow>
@@ -142,15 +127,15 @@
                         android:layout_width="match_parent">
                         <TextView
                             android:text="Polisa OC"
-                            android:layout_weight="1"
-                            android:padding="10dip"
-                            android:gravity="right"/>
+                            style="@style/BusLabel"/>
                         <ImageView android:id="@+id/bus_policy_icon_positive"
                             android:src="@drawable/ic_check_black_48dp"
+                            android:tint="@color/icon_green"
                             android:layout_weight="2"
                             android:gravity="left"/>
                         <ImageView android:id="@+id/bus_policy_icon_negative"
                             android:src="@drawable/ic_warning_black_48dp"
+                            android:tint="@color/icon_red"
                             android:layout_weight="2"
                             android:gravity="left"/>
                     </TableRow>
@@ -171,30 +156,20 @@
                         android:layout_width="match_parent">
                         <TextView
                             android:text="Numer rejestracynjy"
-                            android:layout_weight="1"
-                            android:padding="10dip"
-                            android:gravity="right"/>
+                            style="@style/BusLabel"/>
                         <TextView
                             android:id="@+id/bus_registration_number"
-                            android:text="-"
-                            android:layout_weight="2"
-                            android:padding="10dip"
-                            android:gravity="left"/>
+                            style="@style/BusValue"/>
                     </TableRow>
                     <TableRow
                         android:layout_height="wrap_content"
                         android:layout_width="match_parent">
                         <TextView
                             android:text="Numer VIN"
-                            android:layout_weight="1"
-                            android:padding="10dip"
-                            android:gravity="right"/>
+                            style="@style/BusLabel"/>
                         <TextView
                             android:id="@+id/bus_vin_number"
-                            android:text="-"
-                            android:layout_weight="2"
-                            android:padding="10dip"
-                            android:gravity="left"/>
+                            style="@style/BusValue"/>
                     </TableRow>
                 </TableLayout>
             </android.support.v7.widget.CardView>
@@ -213,45 +188,30 @@
                         android:layout_width="match_parent">
                         <TextView
                             android:text="Badanie techniczne"
-                            android:layout_weight="1"
-                            android:padding="10dip"
-                            android:gravity="right"/>
+                            style="@style/BusLabel"/>
                         <TextView
                             android:id="@+id/bus_inspection"
-                            android:text="-"
-                            android:layout_weight="2"
-                            android:padding="10dip"
-                            android:gravity="left"/>
+                            style="@style/BusValue"/>
                     </TableRow>
                     <TableRow
                         android:layout_height="wrap_content"
                         android:layout_width="match_parent">
                         <TextView
                             android:text="Ważne do"
-                            android:layout_weight="1"
-                            android:padding="10dip"
-                            android:gravity="right"/>
+                            style="@style/BusLabel"/>
                         <TextView
                             android:id="@+id/bus_inspection_expire"
-                            android:text="-"
-                            android:layout_weight="2"
-                            android:padding="10dip"
-                            android:gravity="left"/>
+                            style="@style/BusValue"/>
                     </TableRow>
                     <TableRow
                         android:layout_height="wrap_content"
                         android:layout_width="match_parent">
                         <TextView
                             android:text="Stan licznika"
-                            android:layout_weight="1"
-                            android:padding="10dip"
-                            android:gravity="right"/>
+                            style="@style/BusLabel"/>
                         <TextView
                             android:id="@+id/bus_mileage"
-                            android:text="-"
-                            android:layout_weight="2"
-                            android:padding="10dip"
-                            android:gravity="left"/>
+                            style="@style/BusValue"/>
                     </TableRow>
                 </TableLayout>
             </android.support.v7.widget.CardView>

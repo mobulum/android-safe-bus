@@ -1,8 +1,7 @@
 package io.vehiclehistory.safebus.activity;
 
-import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.net.Uri;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,7 +11,6 @@ import android.widget.TextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import io.vehiclehistory.safebus.BuildConfig;
 import io.vehiclehistory.safebus.R;
 import io.vehiclehistory.safebus.data.api.DateFormatter;
 import io.vehiclehistory.safebus.data.model.vehicle.Event;
@@ -91,16 +89,16 @@ public class BusActivity extends BaseActivity {
             busMake.setText(vehicleResponse.getVehicle().getName().getMake().toString());
         }
         if (vehicleResponse.getVehicle().getName() != null && vehicleResponse.getVehicle().getName().getModel() != null) {
-            busModel.setText(vehicleResponse.getVehicle().getName().getModel().toString());
+            busModel.setText(vehicleResponse.getVehicle().getName().getModel());
         }
         if (vehicleResponse.getVehicle().getProduction() != null && vehicleResponse.getVehicle().getProduction().getYear() != null) {
-            busProduction.setText(vehicleResponse.getVehicle().getProduction().getYear().toString());
+            busProduction.setText(vehicleResponse.getVehicle().getProduction().getYear());
         }
         if (vehicleResponse.getVehicle().getPlate() != null && vehicleResponse.getVehicle().getPlate().getValue() != null) {
-            busRegistrationNumber.setText(vehicleResponse.getVehicle().getPlate().getValue().toString());
+            busRegistrationNumber.setText(vehicleResponse.getVehicle().getPlate().getValue());
         }
         if (vehicleResponse.getVehicle().getVin() != null) {
-            busVinNumber.setText(vehicleResponse.getVehicle().getVin().toString());
+            busVinNumber.setText(vehicleResponse.getVehicle().getVin());
         }
 
         for (Event event : vehicleResponse.getEvents()) {
@@ -179,14 +177,5 @@ public class BusActivity extends BaseActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    private void showMarketAppIn() {
-        try {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + BuildConfig.APPLICATION_ID)));
-        } catch (ActivityNotFoundException e) {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id="
-                    + BuildConfig.APPLICATION_ID)));
-        }
     }
 }

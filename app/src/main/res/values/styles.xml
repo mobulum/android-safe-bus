@@ -62,5 +62,19 @@
         <item name="android:layout_marginLeft">@dimen/about_paragraph_horizontal_margin</item>
         <item name="android:layout_marginRight">@dimen/about_paragraph_horizontal_margin</item>
     </style>
-    
+
+    <style name="BusLabel">
+        <item name="android:layout_weight">1</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:gravity">right</item>
+    </style>
+
+    <style name="BusValue">
+        <item name="android:layout_weight">2</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:gravity">left</item>
+        <item name="android:text">-</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>
