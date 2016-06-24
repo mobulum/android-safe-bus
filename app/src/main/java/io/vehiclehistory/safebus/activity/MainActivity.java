@@ -67,7 +67,7 @@ public class MainActivity extends BaseActivity implements VehicleMvpView {
         // Make sure the toolbar exists in the activity and is not null
         setSupportActionBar(toolbar);
 
-        busPlate.setText("SBE12345");
+        busPlate.setText("PZ9340L");
     }
 
     @Override
