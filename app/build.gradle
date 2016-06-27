@@ -12,8 +12,8 @@ android {
         release {
             storeFile file(System.getenv("ANDROID_KEY_STORE_FILE"))
             storePassword System.getenv("ANDROID_KEY_STORE_PASSWORD")
-            keyAlias System.getenv("ANDROID_KEY_STORE_RECEIPTS_KEY_ALIAS")
-            keyPassword System.getenv("ANDROID_KEY_STORE_RECEIPTS_KEY_PASSWORD")
+            keyAlias System.getenv("ANDROID_KEY_STORE_SAFEBUS_KEY_ALIAS")
+            keyPassword System.getenv("ANDROID_KEY_STORE_SAFEBUS_KEY_PASSWORD")
         }
     }
 
