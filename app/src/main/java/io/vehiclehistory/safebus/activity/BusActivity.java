@@ -2,12 +2,18 @@ package io.vehiclehistory.safebus.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -22,6 +28,9 @@ import io.vehiclehistory.safebus.data.model.vehicle.VehicleResponse;
 
 public class BusActivity extends BaseActivity {
     public static final String BUS_RESPONSE_KEY = "bus_response";
+
+    @Bind(R.id.toolbar)
+    protected Toolbar toolbar;
 
     @Bind(R.id.bus_make)
     protected TextView busMake;
@@ -66,22 +75,34 @@ public class BusActivity extends BaseActivity {
     protected ImageView busPolicyIconNegative;
 
     private VehicleResponse vehicleResponse;
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         component().inject(this);
         setContentView(R.layout.activity_bus);
         ButterKnife.bind(this);
+        setToolbar();
 
-        // Sets the Toolbar to act as the ActionBar for this Activity window.
-        // Make sure the toolbar exists in the activity and is not null
-        //setSupportActionBar(toolbar);
         Intent i = getIntent();
         Bundle args = i.getExtras();
         vehicleResponse = (VehicleResponse) args.getSerializable(
                 BusActivity.BUS_RESPONSE_KEY);
         bindViewResult();
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+    }
+
+    private void setToolbar() {
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
     }
 
     private void bindViewResult() {
@@ -109,8 +130,8 @@ public class BusActivity extends BaseActivity {
         }
 
         if (vehicleResponse.getVehicle().getMileage() != null
-        && vehicleResponse.getVehicle().getMileage().getValue() != null
-        && vehicleResponse.getVehicle().getMileage().getType() != null) {
+                && vehicleResponse.getVehicle().getMileage().getValue() != null
+                && vehicleResponse.getVehicle().getMileage().getType() != null) {
             busMileage.setText(vehicleResponse.getVehicle().getMileage().getValue() + " " + vehicleResponse.getVehicle().getMileage().getType());
         }
 
