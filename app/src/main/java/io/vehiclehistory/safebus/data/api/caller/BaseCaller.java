@@ -114,7 +114,6 @@ public abstract class BaseCaller<T extends MvpView> implements Caller<T> {
 
     protected void handleApiError(Throwable e) {
         checkViewAttached();
-        getMvpView().finishedLoadingData();
 
         Timber.e(e, "There was an api error");
         ApiError exception = ApiError.internalApiError();

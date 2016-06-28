@@ -87,7 +87,7 @@
                 <TableLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
-                    <TableRow
+                    <TableRow android:id="@+id/bus_inspection_row"
                         android:layout_height="wrap_content"
                         android:layout_width="match_parent">
                         <TextView
@@ -104,7 +104,7 @@
                             android:layout_weight="2"
                             android:gravity="start"/>
                     </TableRow>
-                    <TableRow
+                    <TableRow android:id="@+id/bus_registration_row"
                         android:layout_height="wrap_content"
                         android:layout_width="match_parent">
                         <TextView
@@ -121,7 +121,7 @@
                             android:layout_weight="2"
                             android:gravity="start"/>
                     </TableRow>
-                    <TableRow
+                    <TableRow android:id="@+id/bus_policy_row"
                         android:layout_height="wrap_content"
                         android:layout_width="match_parent">
                         <TextView

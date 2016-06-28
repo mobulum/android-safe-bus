@@ -9,7 +9,8 @@
     tools:context=".activity.MainActivity"
     android:fitsSystemWindows="true"
     android:descendantFocusability="beforeDescendants"
-    android:focusableInTouchMode="true">
+    android:focusableInTouchMode="true"
+    android:focusable="true">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -92,7 +93,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/bus_logo"
-                android:alpha="0.4"
+                android:alpha="0.2"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"

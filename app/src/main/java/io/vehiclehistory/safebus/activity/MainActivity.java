@@ -67,7 +67,7 @@ public class MainActivity extends BaseActivity implements VehicleMvpView {
         // Make sure the toolbar exists in the activity and is not null
         setSupportActionBar(toolbar);
 
-        busPlate.setText("PZ9340L");
+        busPlate.setText("SBE12345");
     }
 
     @Override
@@ -160,11 +160,13 @@ public class MainActivity extends BaseActivity implements VehicleMvpView {
 
     @Override
     public void onErrorResponse(String message) {
+        finishedLoadingData();
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onNoConnectionError() {
+        finishedLoadingData();
         Toast.makeText(getApplicationContext(), R.string.connection_error, Toast.LENGTH_SHORT).show();
     }
 

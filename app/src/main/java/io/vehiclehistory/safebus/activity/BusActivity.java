@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import butterknife.Bind;
@@ -70,6 +71,15 @@ public class BusActivity extends BaseActivity {
 
     @Bind(R.id.bus_policy_icon_negative)
     protected ImageView busPolicyIconNegative;
+
+    @Bind(R.id.bus_inspection_row)
+    protected TableRow busInspectionRow;
+
+    @Bind(R.id.bus_registration_row)
+    protected TableRow busRegistrationRow;
+
+    @Bind(R.id.bus_policy_row)
+    protected TableRow busPolicyRow;
 
     private VehicleResponse vehicleResponse;
 
@@ -137,9 +147,10 @@ public class BusActivity extends BaseActivity {
                 busInspectionIconPositive.setVisibility(View.GONE);
                 busInspectionIconNegative.setVisibility(View.VISIBLE);
             } else {
-                busInspectionIconPositive.setVisibility(View.GONE);
-                busInspectionIconNegative.setVisibility(View.GONE);
+                busInspectionRow.setVisibility(View.GONE);
             }
+        } else {
+            busInspectionRow.setVisibility(View.GONE);
         }
 
         if (vehicleResponse.getVehicle().getRegistration() != null) {
@@ -150,9 +161,10 @@ public class BusActivity extends BaseActivity {
                 busRegistrationIconPositive.setVisibility(View.GONE);
                 busRegistrationIconNegative.setVisibility(View.VISIBLE);
             } else {
-                busRegistrationIconPositive.setVisibility(View.GONE);
-                busRegistrationIconNegative.setVisibility(View.GONE);
+                busRegistrationRow.setVisibility(View.GONE);
             }
+        } else {
+            busRegistrationRow.setVisibility(View.GONE);
         }
 
         if (vehicleResponse.getVehicle().getPolicy() != null) {
@@ -163,9 +175,10 @@ public class BusActivity extends BaseActivity {
                 busPolicyIconPositive.setVisibility(View.GONE);
                 busPolicyIconNegative.setVisibility(View.VISIBLE);
             } else {
-                busPolicyIconPositive.setVisibility(View.GONE);
-                busPolicyIconNegative.setVisibility(View.GONE);
+                busPolicyRow.setVisibility(View.GONE);
             }
+        } else {
+            busPolicyRow.setVisibility(View.GONE);
         }
     }
 
