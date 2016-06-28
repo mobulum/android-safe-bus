@@ -6,7 +6,6 @@
     android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/form_background"
     tools:context=".activity.MainActivity"
     android:fitsSystemWindows="true"
     android:descendantFocusability="beforeDescendants"

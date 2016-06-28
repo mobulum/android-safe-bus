@@ -14,4 +14,16 @@
 
     <string name="menu_rate">oceń aplikację</string>
     <string name="menu_about">o aplikacji</string>
+
+    <string name="expire_at">Ważne do</string>
+    <string name="inspection">Badanie techniczne</string>
+    <string name="mileage">Stan licznika</string>
+    <string name="vin_number">Numer VIN</string>
+    <string name="registration_number">Numer rejestracyjny</string>
+    <string name="policy">Polisa OC</string>
+    <string name="registration_status">Status rejestracji</string>
+    <string name="inspection_status">Badanie techniczne</string>
+    <string name="production_year">Rok produkcji</string>
+    <string name="model">Model</string>
+    <string name="make">Producent</string>
 </resources>
