@@ -93,7 +93,6 @@ public class MainActivity extends BaseActivity implements VehicleMvpView {
                 //clearErrors();
                 validateAndPerformSearch();
             }
-
         });
     }
 
@@ -116,13 +115,11 @@ public class MainActivity extends BaseActivity implements VehicleMvpView {
     }
 
     private void handleValidationIssues() {
-        Toast.makeText(getApplicationContext(), "Wpisz tablice", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), R.string.invalid_input, Toast.LENGTH_SHORT).show();
     }
 
-    // Menu icons are inflated just as they were with actionbar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
@@ -130,12 +127,15 @@ public class MainActivity extends BaseActivity implements VehicleMvpView {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home:
-
+            case R.id.menu_rate:
+                showMarketAppIn();
                 return true;
+            case R.id.menu_about:
+                showAboutActivity();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-
-        return super.onOptionsItemSelected(item);
     }
 
     private void showMarketAppIn() {
@@ -145,6 +145,10 @@ public class MainActivity extends BaseActivity implements VehicleMvpView {
             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id="
                     + BuildConfig.APPLICATION_ID)));
         }
+    }
+
+    private void showAboutActivity() {
+        //TODO
     }
 
     @Override
@@ -161,8 +165,7 @@ public class MainActivity extends BaseActivity implements VehicleMvpView {
 
     @Override
     public void onNoConnectionError() {
-        Toast.makeText(getApplicationContext(), "No conneciton", Toast.LENGTH_SHORT).show();
-
+        Toast.makeText(getApplicationContext(), R.string.connection_error, Toast.LENGTH_SHORT).show();
     }
 
     @Override

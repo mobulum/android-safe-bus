@@ -1,6 +1,8 @@
 package io.vehiclehistory.safebus.activity;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -11,6 +13,7 @@ import android.widget.TextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import io.vehiclehistory.safebus.BuildConfig;
 import io.vehiclehistory.safebus.R;
 import io.vehiclehistory.safebus.data.api.DateFormatter;
 import io.vehiclehistory.safebus.data.model.vehicle.Event;
@@ -172,10 +175,8 @@ public class BusActivity extends BaseActivity {
         ButterKnife.unbind(this);
     }
 
-    // Menu icons are inflated just as they were with actionbar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
@@ -183,11 +184,27 @@ public class BusActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home:
-
+            case R.id.menu_rate:
+                showMarketAppIn();
                 return true;
+            case R.id.menu_about:
+                showAboutActivity();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
+    }
 
-        return super.onOptionsItemSelected(item);
+    private void showMarketAppIn() {
+        try {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + BuildConfig.APPLICATION_ID)));
+        } catch (ActivityNotFoundException e) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id="
+                    + BuildConfig.APPLICATION_ID)));
+        }
+    }
+
+    private void showAboutActivity() {
+        //TODO
     }
 }

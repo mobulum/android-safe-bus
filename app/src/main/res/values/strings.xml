@@ -20,4 +20,6 @@
     <string name="production_year">Rok produkcji</string>
     <string name="model">Model</string>
     <string name="make">Producent</string>
+    <string name="invalid_input">Wprowadź numer rejestracyjny</string>
+    <string name="connection_error">Błąd połączenia internetowego</string>
 </resources>
