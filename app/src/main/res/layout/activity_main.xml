@@ -92,6 +92,7 @@
                 android:src="@drawable/bus_logo"
                 android:alpha="0.4"
                 android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
                 android:paddingBottom="150dp" />
 

@@ -9,7 +9,6 @@
 
     <color name="inactive_tab_text_color">#99ffffff</color>
 
-    <color name="divider">#B6B6B6</color>
     <color name="windowBackground">#FFF</color>
     <color name="white">#FFF</color>
     <color name="form_background">#F1F5F8</color>
