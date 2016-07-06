@@ -31,5 +31,6 @@
     <string name="about_contact">Kontakt</string>
     <string name="about_application_version">Wersja aplikacji: </string>
     <string name="contact_email">safe-bus-android@vehicle-history.io</string>
+    <string name="show_example">Pokaż przykład</string>
 
 </resources>
