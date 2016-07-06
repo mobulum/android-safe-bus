@@ -22,4 +22,14 @@
     <string name="make">Producent</string>
     <string name="invalid_input">Wprowadź numer rejestracyjny</string>
     <string name="connection_error">Błąd połączenia internetowego</string>
+
+    <string name="activity_about">O aplikacji</string>
+    <string name="about_first_paragraph">Aplikacja prezentuje treści darmowo dostępne w sieci Internet. Developer nie rości sobie żadnych praw do treści prezentowanych w aplikacji.</string>
+    <string name="about_second_paragraph">Dane pochodzą z Centralnej Ewidencji Pojazdów. Jest to rejestr prowadzony przez Ministra Spraw Wewnętrznych na podstawie przepisów ustawy Prawo o ruchu drogowym.</string>
+    <string name="about_third_paragraph">Aplikacja korzysta z otwartego API (https://vehicle-history.io)</string>
+    <string name="about_fourth_paragraph">Prezentowane dane można wykorzystać tylko na własne ryzyko i na własną odpowiedzialność.</string>
+    <string name="about_contact">Kontakt</string>
+    <string name="about_application_version">Wersja aplikacji: </string>
+    <string name="contact_email">safe-bus-android@vehicle-history.io</string>
+
 </resources>

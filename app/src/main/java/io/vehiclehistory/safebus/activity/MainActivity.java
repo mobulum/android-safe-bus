@@ -148,7 +148,7 @@ public class MainActivity extends BaseActivity implements VehicleMvpView {
     }
 
     private void showAboutActivity() {
-        //TODO
+        startActivity(new Intent(this, AboutActivity.class));
     }
 
     @Override

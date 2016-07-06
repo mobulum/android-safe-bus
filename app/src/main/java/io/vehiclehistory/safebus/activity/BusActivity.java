@@ -218,6 +218,6 @@ public class BusActivity extends BaseActivity {
     }
 
     private void showAboutActivity() {
-        //TODO
+        startActivity(new Intent(this, AboutActivity.class));
     }
 }
