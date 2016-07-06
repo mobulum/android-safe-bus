@@ -111,7 +111,7 @@ public class BusActivity extends BaseActivity {
 
     private void bindViewResult() {
         if (vehicleResponse.getVehicle().getName() != null && vehicleResponse.getVehicle().getName().getMake() != null) {
-            busMake.setText(vehicleResponse.getVehicle().getName().getMake().toString());
+            busMake.setText(vehicleResponse.getVehicle().getName().getMake());
         }
         if (vehicleResponse.getVehicle().getName() != null && vehicleResponse.getVehicle().getName().getModel() != null) {
             busModel.setText(vehicleResponse.getVehicle().getName().getModel());
