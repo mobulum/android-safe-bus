@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -95,8 +96,7 @@ public class BusActivity extends BaseActivity {
 
         Intent i = getIntent();
         Bundle args = i.getExtras();
-        vehicleResponse = (VehicleResponse) args.getSerializable(
-                BusActivity.BUS_RESPONSE_KEY);
+        vehicleResponse = (VehicleResponse) args.getSerializable(BusActivity.BUS_RESPONSE_KEY);
         bindViewResult();
     }
 
@@ -138,7 +138,13 @@ public class BusActivity extends BaseActivity {
         if (vehicleResponse.getVehicle().getMileage() != null
                 && vehicleResponse.getVehicle().getMileage().getValue() != null
                 && vehicleResponse.getVehicle().getMileage().getType() != null) {
-            busMileage.setText(vehicleResponse.getVehicle().getMileage().getValue() + " " + vehicleResponse.getVehicle().getMileage().getType());
+
+            String text = TextUtils.join(" ", new String[]{
+                    vehicleResponse.getVehicle().getMileage().getValue(),
+                    vehicleResponse.getVehicle().getMileage().getType().toString()
+            });
+
+            busMileage.setText(text);
         }
 
         if (vehicleResponse.getVehicle().getInspection() != null) {
