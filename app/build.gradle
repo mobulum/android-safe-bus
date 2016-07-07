@@ -105,11 +105,6 @@ dependencies {
         transitive = true;
     }
 
-    compile('com.weiwangcn.betterspinner:library-material:1.1.0') {
-        exclude group: 'com.android.support', module: 'appcompat-v7'
-    }
-    compile 'com.jpardogo.materialtabstrip:library:1.1.0'
-
     compile 'joda-time:joda-time:2.9.4'
     compile 'org.apache.commons:commons-lang3:3.4'
 
