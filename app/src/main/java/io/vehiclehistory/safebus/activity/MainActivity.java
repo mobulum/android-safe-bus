@@ -12,18 +12,21 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 import android.widget.ViewAnimator;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import io.vehiclehistory.safebus.BuildConfig;
 import io.vehiclehistory.safebus.R;
 import io.vehiclehistory.safebus.data.api.caller.GetVehicleHistoryCaller;
 import io.vehiclehistory.safebus.data.model.vehicle.VehicleResponse;
 import io.vehiclehistory.safebus.ui.view.VehicleMvpView;
+
+import static xdroid.toaster.Toaster.toast;
+import static xdroid.toaster.Toaster.toastLong;
 
 
 public class MainActivity extends BaseActivity implements VehicleMvpView {
@@ -32,35 +35,36 @@ public class MainActivity extends BaseActivity implements VehicleMvpView {
     private static final int ANIMATOR_PROGRESS = 1;
     private static final String EXAMPLE_PLATE = "SBE12345";
 
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     protected Toolbar toolbar;
 
-    @Bind(R.id.findBus)
+    @BindView(R.id.findBus)
     protected Button findBusButton;
 
-    @Bind(R.id.busPlate)
+    @BindView(R.id.busPlate)
     protected EditText busPlate;
 
-    @Bind(R.id.find_bus_animator)
+    @BindView(R.id.find_bus_animator)
     protected ViewAnimator findBusAnimator;
 
-    @Bind(R.id.input_layout)
+    @BindView(R.id.input_layout)
     protected CardView inputLayout;
 
-    @Bind(R.id.show_example)
+    @BindView(R.id.show_example)
     protected Button exampleButton;
 
     @Inject
     protected GetVehicleHistoryCaller getVehicleHistoryPresenter;
 
     private final Handler handler = new Handler();
+    private Unbinder unbinder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         component().inject(this);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+        unbinder = ButterKnife.bind(this);
 
         bindViews();
         resetValues();
@@ -73,7 +77,7 @@ public class MainActivity extends BaseActivity implements VehicleMvpView {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        ButterKnife.unbind(this);
+        unbinder.unbind();
         getVehicleHistoryPresenter.detachView();
     }
 
@@ -123,7 +127,7 @@ public class MainActivity extends BaseActivity implements VehicleMvpView {
     }
 
     private void handleValidationIssues() {
-        Toast.makeText(getApplicationContext(), R.string.invalid_input, Toast.LENGTH_SHORT).show();
+        toastLong(R.string.invalid_input);
     }
 
     @Override
@@ -169,13 +173,13 @@ public class MainActivity extends BaseActivity implements VehicleMvpView {
     @Override
     public void onErrorResponse(String message) {
         finishedLoadingData();
-        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+        toast(message);
     }
 
     @Override
     public void onNoConnectionError() {
         finishedLoadingData();
-        Toast.makeText(getApplicationContext(), R.string.connection_error, Toast.LENGTH_SHORT).show();
+        toast(R.string.connection_error);
     }
 
     @Override
@@ -194,7 +198,9 @@ public class MainActivity extends BaseActivity implements VehicleMvpView {
 
             @Override
             public void run() {
-                inputLayout.setEnabled(!locked);
+                if (inputLayout != null) {
+                    inputLayout.setEnabled(!locked);
+                }
             }
         });
     }
@@ -204,7 +210,9 @@ public class MainActivity extends BaseActivity implements VehicleMvpView {
 
             @Override
             public void run() {
-                findBusAnimator.setDisplayedChild(childPosition);
+                if (findBusAnimator != null) {
+                    findBusAnimator.setDisplayedChild(childPosition);
+                }
             }
         });
     }

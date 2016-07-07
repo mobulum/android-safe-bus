@@ -12,8 +12,9 @@ import android.widget.ImageView;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import io.vehiclehistory.safebus.BuildConfig;
 import io.vehiclehistory.safebus.R;
 import io.vehiclehistory.safebus.data.api.DateFormatter;
@@ -27,68 +28,69 @@ import io.vehiclehistory.safebus.data.model.vehicle.VehicleResponse;
 public class BusActivity extends BaseActivity {
     public static final String BUS_RESPONSE_KEY = "bus_response";
 
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     protected Toolbar toolbar;
 
-    @Bind(R.id.bus_make)
+    @BindView(R.id.bus_make)
     protected TextView busMake;
 
-    @Bind(R.id.bus_model)
+    @BindView(R.id.bus_model)
     protected TextView busModel;
 
-    @Bind(R.id.bus_production)
+    @BindView(R.id.bus_production)
     protected TextView busProduction;
 
-    @Bind(R.id.bus_registration_number)
+    @BindView(R.id.bus_registration_number)
     protected TextView busRegistrationNumber;
 
-    @Bind(R.id.bus_vin_number)
+    @BindView(R.id.bus_vin_number)
     protected TextView busVinNumber;
 
-    @Bind(R.id.bus_inspection)
+    @BindView(R.id.bus_inspection)
     protected TextView busInspection;
 
-    @Bind(R.id.bus_inspection_expire)
+    @BindView(R.id.bus_inspection_expire)
     protected TextView busInspectionExpire;
 
-    @Bind(R.id.bus_mileage)
+    @BindView(R.id.bus_mileage)
     protected TextView busMileage;
 
-    @Bind(R.id.bus_inspection_icon_positive)
+    @BindView(R.id.bus_inspection_icon_positive)
     protected ImageView busInspectionIconPositive;
 
-    @Bind(R.id.bus_inspection_icon_negative)
+    @BindView(R.id.bus_inspection_icon_negative)
     protected ImageView busInspectionIconNegative;
 
-    @Bind(R.id.bus_registration_icon_positive)
+    @BindView(R.id.bus_registration_icon_positive)
     protected ImageView busRegistrationIconPositive;
 
-    @Bind(R.id.bus_registration_icon_negative)
+    @BindView(R.id.bus_registration_icon_negative)
     protected ImageView busRegistrationIconNegative;
 
-    @Bind(R.id.bus_policy_icon_positive)
+    @BindView(R.id.bus_policy_icon_positive)
     protected ImageView busPolicyIconPositive;
 
-    @Bind(R.id.bus_policy_icon_negative)
+    @BindView(R.id.bus_policy_icon_negative)
     protected ImageView busPolicyIconNegative;
 
-    @Bind(R.id.bus_inspection_row)
+    @BindView(R.id.bus_inspection_row)
     protected TableRow busInspectionRow;
 
-    @Bind(R.id.bus_registration_row)
+    @BindView(R.id.bus_registration_row)
     protected TableRow busRegistrationRow;
 
-    @Bind(R.id.bus_policy_row)
+    @BindView(R.id.bus_policy_row)
     protected TableRow busPolicyRow;
 
     private VehicleResponse vehicleResponse;
+    private Unbinder unbinder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         component().inject(this);
         setContentView(R.layout.activity_bus);
-        ButterKnife.bind(this);
+        unbinder = ButterKnife.bind(this);
         setToolbar();
 
         Intent i = getIntent();
@@ -185,7 +187,7 @@ public class BusActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        ButterKnife.unbind(this);
+        unbinder.unbind();
     }
 
     @Override

@@ -8,8 +8,8 @@ import io.vehiclehistory.safebus.data.api.auth.OnAuthCallback;
 import io.vehiclehistory.safebus.data.model.ApiError;
 import io.vehiclehistory.safebus.data.model.Auth;
 import io.vehiclehistory.safebus.ui.view.MvpView;
-import retrofit2.HttpException;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.HttpException;
 import rx.Subscription;
 import timber.log.Timber;
 
@@ -20,8 +20,8 @@ import timber.log.Timber;
  */
 public abstract class BaseCaller<T extends MvpView> implements Caller<T> {
 
-    private static final int UNAUTHORIZED = 401;
-    private static final int FORBIDDEN = 403;
+    protected static final int UNAUTHORIZED = 401;
+    protected static final int FORBIDDEN = 403;
 
     private final NetworkStateManager networkStateManager;
 
@@ -33,8 +33,6 @@ public abstract class BaseCaller<T extends MvpView> implements Caller<T> {
 
     private Subscription subscription;
 
-    private T mMvpView;
-
     public BaseCaller(
             NetworkStateManager networkStateManager,
             DataManager dataManager,
@@ -44,6 +42,9 @@ public abstract class BaseCaller<T extends MvpView> implements Caller<T> {
         this.dataManager = dataManager;
         this.retrofit = retrofit;
     }
+
+    private T mMvpView;
+
 
     protected void resetRetry() {
         retry = 0;
@@ -147,12 +148,13 @@ public abstract class BaseCaller<T extends MvpView> implements Caller<T> {
         //nop
     }
 
-    private void authorizeAndRetry() {
+    protected void authorizeAndRetry() {
         dataManager.getNewSession(new OnAuthCallback() {
 
             @Override
             public void onSuccess(Auth response) {
                 Timber.e("authorizeAndRetry.onSuccess");
+                resetRetry();
                 preCall();
             }
 

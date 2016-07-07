@@ -1,12 +1,13 @@
 apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
 apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'com.github.ben-manes.versions'
 
 apply from: 'credentials.gradle'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    buildToolsVersion "23.0.3"
 
     signingConfigs {
         release {
@@ -64,18 +65,17 @@ configurations {
 }
 
 dependencies {
-    final SUPPORT_LIBRARY_VERSION = '23.1.1'
-    final RETROFIT_VERSION = '2.0.0-beta3'
-    final OKHTTP_VERSION = '3.0.1'
-    final DAGGER_VERSION = '2.0.2'
-    final DEXMAKER_VERSION = '1.4'
-    final HAMCREST_VERSION = '1.4-atlassian-1'
-    final ESPRESSO_VERSION = '2.2.1'
-    final RUNNER_VERSION = '0.4.1'
+    final SUPPORT_LIBRARY_VERSION = '23.4.0'
+    final RETROFIT_VERSION = '2.1.0'
+    final OKHTTP_VERSION = '3.3.1'
+    final DAGGER_VERSION = '2.5'
+    final TIMBER_VERSION = '4.1.2'
+    final RXANDROID_VERSION = '1.2.1'
+    final RXJAVA_VERSION = '1.1.6'
+    final BUTTERKNIFE_VERSION = '8.1.0'
+    final TOASTER_VERSION = '0.3.0'
 
     def daggerCompiler = "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
-    def jUnit = "junit:junit:4.12"
-    def mockito = "org.mockito:mockito-core:1.10.19"
 
     // App Dependencies
     compile "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION"
@@ -84,18 +84,24 @@ dependencies {
     compile "com.android.support:support-annotations:$SUPPORT_LIBRARY_VERSION"
     compile "com.android.support:design:$SUPPORT_LIBRARY_VERSION"
 
-    compile 'com.squareup.sqlbrite:sqlbrite:0.5.0'
+
     compile "com.squareup.okhttp3:okhttp:$OKHTTP_VERSION"
     compile "com.squareup.okhttp3:logging-interceptor:$OKHTTP_VERSION"
     compile "com.squareup.retrofit2:retrofit:$RETROFIT_VERSION"
     compile "com.squareup.retrofit2:converter-gson:$RETROFIT_VERSION"
-    compile "com.squareup.retrofit2:adapter-rxjava:$RETROFIT_VERSION"
+    compile("com.squareup.retrofit2:adapter-rxjava:$RETROFIT_VERSION") {
+        exclude module: 'rxjava'
+    }
 
-    compile 'io.reactivex:rxandroid:1.1.0'
-    compile 'io.reactivex:rxjava:1.1.0'
-    compile 'com.jakewharton:butterknife:7.0.1'
-    compile 'com.jakewharton.timber:timber:4.1.0'
-    compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
+    compile("io.reactivex:rxandroid:$RXANDROID_VERSION") {
+        exclude module: 'rxjava'
+    }
+    compile "io.reactivex:rxjava:$RXJAVA_VERSION"
+    compile "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
+
+
+    compile "com.jakewharton.timber:timber:$TIMBER_VERSION"
+    compile('com.crashlytics.sdk.android:crashlytics:2.6.0@aar') {
         transitive = true;
     }
 
@@ -104,40 +110,16 @@ dependencies {
     }
     compile 'com.jpardogo.materialtabstrip:library:1.1.0'
 
-    compile 'joda-time:joda-time:2.9.2'
+    compile 'joda-time:joda-time:2.9.4'
     compile 'org.apache.commons:commons-lang3:3.4'
-    compile 'commons-validator:commons-validator:1.5.0'
+
+    compile "com.shamanland:xdroid-toaster:$TOASTER_VERSION"
 
     compile "com.google.dagger:dagger:$DAGGER_VERSION"
     provided 'org.glassfish:javax.annotation:10.0-b28' //Required by Dagger2
 
     // APT dependencies
     apt daggerCompiler
+    apt "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
 
-    // Instrumentation test dependencies
-    androidTestCompile jUnit
-    androidTestCompile mockito
-    androidTestCompile "com.android.support:support-annotations:$SUPPORT_LIBRARY_VERSION"
-    androidTestCompile("com.android.support.test.espresso:espresso-contrib:$ESPRESSO_VERSION") {
-        exclude group: 'com.android.support', module: 'appcompat'
-        exclude group: 'com.android.support', module: 'support-v4'
-        exclude group: 'com.android.support', module: 'recyclerview-v7'
-    }
-    androidTestCompile "com.android.support.test.espresso:espresso-core:$ESPRESSO_VERSION"
-    androidTestCompile "com.android.support.test:runner:$RUNNER_VERSION"
-    androidTestCompile "com.android.support.test:rules:$RUNNER_VERSION"
-    androidTestCompile "com.crittercism.dexmaker:dexmaker:$DEXMAKER_VERSION"
-    androidTestCompile "com.crittercism.dexmaker:dexmaker-dx:$DEXMAKER_VERSION"
-    androidTestCompile "com.crittercism.dexmaker:dexmaker-mockito:$DEXMAKER_VERSION"
-
-    // Unit tests dependencies
-    testCompile jUnit
-    testCompile mockito
-    testCompile "org.hamcrest:hamcrest-core:$HAMCREST_VERSION"
-    testCompile "org.hamcrest:hamcrest-library:$HAMCREST_VERSION"
-    testCompile "org.hamcrest:hamcrest-integration:$HAMCREST_VERSION"
-    testCompile 'org.robolectric:robolectric:3.0'
-
-    testApt daggerCompiler
-    androidTestApt daggerCompiler
 }
