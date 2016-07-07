@@ -2,10 +2,35 @@
 <resources>
     <string name="app_name">Bezpieczny autobus</string>
 
-    <string name="title_section_bus_search">Wyszukaj autobus</string>
-    <string name="title_section_search_history">Historia wyszukiwania</string>
-    <string name="title_section_options">Opcje</string>
-    <string name="title_section_rate">Oceń nas</string>
-    <string name="title_section_about">O programie</string>
+    <string name="main_plate">Numer rejestracyjny</string>
+    <string name="main_search">wyszukaj</string>
+    <string name="main_encourage">Wprowadź numer rejestracyjny autobusu i sprawdź, czy pojazd którym podróżujesz posiada ważne badanie techniczne.</string>
+
+    <string name="menu_rate">oceń aplikację</string>
+    <string name="menu_about">o aplikacji</string>
+
+    <string name="expire_at">Ważne do</string>
+    <string name="inspection">Badanie techniczne</string>
+    <string name="mileage">Stan licznika</string>
+    <string name="vin_number">Numer VIN</string>
+    <string name="registration_number">Numer rejestracyjny</string>
+    <string name="policy">Polisa OC</string>
+    <string name="registration_status">Status rejestracji</string>
+    <string name="inspection_status">Badanie techniczne</string>
+    <string name="production_year">Rok produkcji</string>
+    <string name="model">Model</string>
+    <string name="make">Producent</string>
+    <string name="invalid_input">Wprowadź numer rejestracyjny</string>
+    <string name="connection_error">Błąd połączenia internetowego</string>
+
+    <string name="activity_about">O aplikacji</string>
+    <string name="about_first_paragraph">Aplikacja prezentuje treści darmowo dostępne w sieci Internet. Developer nie rości sobie żadnych praw do treści prezentowanych w aplikacji.</string>
+    <string name="about_second_paragraph">Dane pochodzą z Centralnej Ewidencji Pojazdów. Jest to rejestr prowadzony przez Ministra Spraw Wewnętrznych na podstawie przepisów ustawy Prawo o ruchu drogowym.</string>
+    <string name="about_third_paragraph">Aplikacja korzysta z otwartego API (https://vehicle-history.io)</string>
+    <string name="about_fourth_paragraph">Prezentowane dane można wykorzystać tylko na własne ryzyko i na własną odpowiedzialność.</string>
+    <string name="about_contact">Kontakt</string>
+    <string name="about_application_version">Wersja aplikacji: </string>
+    <string name="contact_email">safe-bus-android@vehicle-history.io</string>
+    <string name="show_example">Pokaż przykład</string>
 
 </resources>
