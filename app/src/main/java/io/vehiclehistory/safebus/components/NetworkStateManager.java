@@ -11,12 +11,8 @@ public class NetworkStateManager {
         this.connectivityManager = connectivityManager;
     }
 
-    public boolean isConnectedOrConnecting(){
+    public boolean isConnectedOrConnecting() {
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        if (activeNetworkInfo != null) {
-            return activeNetworkInfo.isConnectedOrConnecting();
-        }
-
-        return false;
+        return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting();
     }
 }

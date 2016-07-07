@@ -16,13 +16,13 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.PBEParameterSpec;
 
-import timber.log.BuildConfig;
+import io.vehiclehistory.safebus.BuildConfig;
 import timber.log.Timber;
 
 public class ObscuredSharedPreferences implements SharedPreferences {
 
     protected static final String UTF8 = "utf-8";
-    private static final char[] SECRET = "sssssds".toCharArray();//BuildConfig.SHARED_PREFS_PASSWORD.toCharArray();
+    private static final char[] SECRET = BuildConfig.SHARED_PREFS_PASSWORD.toCharArray();
 
     protected SharedPreferences delegate;
     protected Context context;
