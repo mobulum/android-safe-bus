@@ -35,6 +35,12 @@
                 android:value=".activity.MainActivity" />
         </activity>
 
+        <activity
+            android:name=".activity.AboutActivity"
+            android:label="@string/activity_about" >
+
+        </activity>
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="fe2930de29d3bda835dc3ed375ffc52495285ae0" />

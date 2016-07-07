@@ -15,8 +15,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.ViewAnimator;
 
-import com.rengwuxian.materialedittext.MaterialEditText;
-
 import javax.inject.Inject;
 
 import butterknife.Bind;
@@ -32,6 +30,7 @@ public class MainActivity extends BaseActivity implements VehicleMvpView {
 
     private static final int ANIMATOR_BUTTON = 0;
     private static final int ANIMATOR_PROGRESS = 1;
+    private static final String EXAMPLE_PLATE = "SBE12345";
 
     @Bind(R.id.toolbar)
     protected Toolbar toolbar;
@@ -47,6 +46,9 @@ public class MainActivity extends BaseActivity implements VehicleMvpView {
 
     @Bind(R.id.input_layout)
     protected CardView inputLayout;
+
+    @Bind(R.id.show_example)
+    protected Button exampleButton;
 
     @Inject
     protected GetVehicleHistoryCaller getVehicleHistoryPresenter;
@@ -66,8 +68,6 @@ public class MainActivity extends BaseActivity implements VehicleMvpView {
         // Sets the Toolbar to act as the ActionBar for this Activity window.
         // Make sure the toolbar exists in the activity and is not null
         setSupportActionBar(toolbar);
-
-        busPlate.setText("PZ9340L");
     }
 
     @Override
@@ -79,6 +79,14 @@ public class MainActivity extends BaseActivity implements VehicleMvpView {
 
     private void bindViews() {
         getVehicleHistoryPresenter.attachView(this);
+
+        exampleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                busPlate.setText(EXAMPLE_PLATE);
+                findBusButton.callOnClick();
+            }
+        });
     }
 
     private void resetValues() {
@@ -93,7 +101,6 @@ public class MainActivity extends BaseActivity implements VehicleMvpView {
                 //clearErrors();
                 validateAndPerformSearch();
             }
-
         });
     }
 
@@ -116,13 +123,11 @@ public class MainActivity extends BaseActivity implements VehicleMvpView {
     }
 
     private void handleValidationIssues() {
-        Toast.makeText(getApplicationContext(), "Wpisz tablice", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), R.string.invalid_input, Toast.LENGTH_SHORT).show();
     }
 
-    // Menu icons are inflated just as they were with actionbar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
@@ -130,12 +135,15 @@ public class MainActivity extends BaseActivity implements VehicleMvpView {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home:
-
+            case R.id.menu_rate:
+                showMarketAppIn();
                 return true;
+            case R.id.menu_about:
+                showAboutActivity();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-
-        return super.onOptionsItemSelected(item);
     }
 
     private void showMarketAppIn() {
@@ -147,6 +155,10 @@ public class MainActivity extends BaseActivity implements VehicleMvpView {
         }
     }
 
+    private void showAboutActivity() {
+        startActivity(new Intent(this, AboutActivity.class));
+    }
+
     @Override
     public void onVehicleFinished(VehicleResponse response) {
         Intent i = new Intent(this, BusActivity.class);
@@ -156,13 +168,14 @@ public class MainActivity extends BaseActivity implements VehicleMvpView {
 
     @Override
     public void onErrorResponse(String message) {
+        finishedLoadingData();
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onNoConnectionError() {
-        Toast.makeText(getApplicationContext(), "No conneciton", Toast.LENGTH_SHORT).show();
-
+        finishedLoadingData();
+        Toast.makeText(getApplicationContext(), R.string.connection_error, Toast.LENGTH_SHORT).show();
     }
 
     @Override

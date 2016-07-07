@@ -1,16 +1,20 @@
 package io.vehiclehistory.safebus.activity;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import io.vehiclehistory.safebus.BuildConfig;
 import io.vehiclehistory.safebus.R;
 import io.vehiclehistory.safebus.data.api.DateFormatter;
 import io.vehiclehistory.safebus.data.model.vehicle.Event;
@@ -22,6 +26,9 @@ import io.vehiclehistory.safebus.data.model.vehicle.VehicleResponse;
 
 public class BusActivity extends BaseActivity {
     public static final String BUS_RESPONSE_KEY = "bus_response";
+
+    @Bind(R.id.toolbar)
+    protected Toolbar toolbar;
 
     @Bind(R.id.bus_make)
     protected TextView busMake;
@@ -65,6 +72,15 @@ public class BusActivity extends BaseActivity {
     @Bind(R.id.bus_policy_icon_negative)
     protected ImageView busPolicyIconNegative;
 
+    @Bind(R.id.bus_inspection_row)
+    protected TableRow busInspectionRow;
+
+    @Bind(R.id.bus_registration_row)
+    protected TableRow busRegistrationRow;
+
+    @Bind(R.id.bus_policy_row)
+    protected TableRow busPolicyRow;
+
     private VehicleResponse vehicleResponse;
 
     @Override
@@ -73,10 +89,8 @@ public class BusActivity extends BaseActivity {
         component().inject(this);
         setContentView(R.layout.activity_bus);
         ButterKnife.bind(this);
+        setToolbar();
 
-        // Sets the Toolbar to act as the ActionBar for this Activity window.
-        // Make sure the toolbar exists in the activity and is not null
-        //setSupportActionBar(toolbar);
         Intent i = getIntent();
         Bundle args = i.getExtras();
         vehicleResponse = (VehicleResponse) args.getSerializable(
@@ -84,9 +98,20 @@ public class BusActivity extends BaseActivity {
         bindViewResult();
     }
 
+    private void setToolbar() {
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+    }
+
     private void bindViewResult() {
         if (vehicleResponse.getVehicle().getName() != null && vehicleResponse.getVehicle().getName().getMake() != null) {
-            busMake.setText(vehicleResponse.getVehicle().getName().getMake().toString());
+            busMake.setText(vehicleResponse.getVehicle().getName().getMake());
         }
         if (vehicleResponse.getVehicle().getName() != null && vehicleResponse.getVehicle().getName().getModel() != null) {
             busModel.setText(vehicleResponse.getVehicle().getName().getModel());
@@ -109,8 +134,8 @@ public class BusActivity extends BaseActivity {
         }
 
         if (vehicleResponse.getVehicle().getMileage() != null
-        && vehicleResponse.getVehicle().getMileage().getValue() != null
-        && vehicleResponse.getVehicle().getMileage().getType() != null) {
+                && vehicleResponse.getVehicle().getMileage().getValue() != null
+                && vehicleResponse.getVehicle().getMileage().getType() != null) {
             busMileage.setText(vehicleResponse.getVehicle().getMileage().getValue() + " " + vehicleResponse.getVehicle().getMileage().getType());
         }
 
@@ -122,9 +147,10 @@ public class BusActivity extends BaseActivity {
                 busInspectionIconPositive.setVisibility(View.GONE);
                 busInspectionIconNegative.setVisibility(View.VISIBLE);
             } else {
-                busInspectionIconPositive.setVisibility(View.GONE);
-                busInspectionIconNegative.setVisibility(View.GONE);
+                busInspectionRow.setVisibility(View.GONE);
             }
+        } else {
+            busInspectionRow.setVisibility(View.GONE);
         }
 
         if (vehicleResponse.getVehicle().getRegistration() != null) {
@@ -135,9 +161,10 @@ public class BusActivity extends BaseActivity {
                 busRegistrationIconPositive.setVisibility(View.GONE);
                 busRegistrationIconNegative.setVisibility(View.VISIBLE);
             } else {
-                busRegistrationIconPositive.setVisibility(View.GONE);
-                busRegistrationIconNegative.setVisibility(View.GONE);
+                busRegistrationRow.setVisibility(View.GONE);
             }
+        } else {
+            busRegistrationRow.setVisibility(View.GONE);
         }
 
         if (vehicleResponse.getVehicle().getPolicy() != null) {
@@ -148,9 +175,10 @@ public class BusActivity extends BaseActivity {
                 busPolicyIconPositive.setVisibility(View.GONE);
                 busPolicyIconNegative.setVisibility(View.VISIBLE);
             } else {
-                busPolicyIconPositive.setVisibility(View.GONE);
-                busPolicyIconNegative.setVisibility(View.GONE);
+                busPolicyRow.setVisibility(View.GONE);
             }
+        } else {
+            busPolicyRow.setVisibility(View.GONE);
         }
     }
 
@@ -160,10 +188,8 @@ public class BusActivity extends BaseActivity {
         ButterKnife.unbind(this);
     }
 
-    // Menu icons are inflated just as they were with actionbar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
@@ -171,11 +197,27 @@ public class BusActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home:
-
+            case R.id.menu_rate:
+                showMarketAppIn();
                 return true;
+            case R.id.menu_about:
+                showAboutActivity();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
+    }
 
-        return super.onOptionsItemSelected(item);
+    private void showMarketAppIn() {
+        try {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + BuildConfig.APPLICATION_ID)));
+        } catch (ActivityNotFoundException e) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id="
+                    + BuildConfig.APPLICATION_ID)));
+        }
+    }
+
+    private void showAboutActivity() {
+        startActivity(new Intent(this, AboutActivity.class));
     }
 }

@@ -38,12 +38,6 @@ public class GetVehicleHistoryCaller extends BaseCaller<VehicleMvpView> {
         return getDataManager().getVehicleHistory(plate)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .doOnSubscribe(new Action0() {
-                    @Override
-                    public void call() {
-                        //nop
-                    }
-                })
                 .subscribe(new Subscriber<VehicleResponse>() {
                     @Override
                     public void onCompleted() {
