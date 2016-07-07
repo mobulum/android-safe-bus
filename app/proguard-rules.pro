@@ -39,7 +39,7 @@
 
 # classes the interact with gson
 -keep class com.google.gson.** { *; }
--keep class tech.receipts.data.model.** { *; }
+-keep class io.vehiclehistory.safebus.data.model.** { *; }
 
 #validators
 -keep class org.apache.commons.** { *; }
@@ -60,3 +60,11 @@
     @butterknife.* <methods>;
 }
 
+# TODO change to match your Retrofit services (only if using inner models withing the service)
+# Some models used by gson are inner classes inside the retrofit service
+-keepclassmembers class io.vehiclehistory.safebus.data.api.auth.AuthApiService$** {
+    !static !private <fields>;
+}
+-keepclassmembers class io.vehiclehistory.safebus.data.api.VehicleHistoryApiService$** {
+    !static !private <fields>;
+}
