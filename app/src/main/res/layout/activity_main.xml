@@ -93,6 +93,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/bus_logo"
+            android:contentDescription="@string/cd_logo"
             android:alpha="0.2"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"

@@ -5,11 +5,10 @@ import io.vehiclehistory.safebus.data.model.vehicle.VehicleResponse;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 import rx.Observable;
 
 public interface VehicleHistoryApiService {
-    public static final String SAFE_BUS_RESOURCE = "/api/bus-reports";
+    String SAFE_BUS_RESOURCE = "/api/bus-reports";
 
     @GET(SAFE_BUS_RESOURCE + "/{plate}")
     @Headers({

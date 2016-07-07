@@ -33,4 +33,13 @@
     <string name="contact_email">safe-bus-android@vehicle-history.io</string>
     <string name="show_example">Pokaż przykład</string>
 
+    <!--contentDescription-->
+    <string name="cd_bus_inspection_icon_positive">bus inspection icon positive</string>
+    <string name="cd_bus_inspection_icon_negative">bus inspection icon negative</string>
+    <string name="cd_bus_registration_icon_positive">bus registration icon positive</string>
+    <string name="cd_bus_registration_icon_negative">bus registration icon negative</string>
+    <string name="cd_bus_policy_icon_positive">bus policy icon positive</string>
+    <string name="cd_bus_policy_icon_negative">bus policy icon negative</string>
+    <string name="cd_logo">logo</string>
+
 </resources>

@@ -17,6 +17,7 @@ import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.PBEParameterSpec;
 
 import io.vehiclehistory.safebus.BuildConfig;
+import timber.log.Timber;
 
 public class ObscuredSharedPreferences implements SharedPreferences {
 
@@ -41,31 +42,61 @@ public class ObscuredSharedPreferences implements SharedPreferences {
 
         @Override
         public Editor putBoolean(String key, boolean value) {
-            delegate.putString(key, encrypt(Boolean.toString(value)));
+            try {
+                String encrypt = encrypt(Boolean.toString(value));
+                delegate.putString(key, encrypt);
+            } catch (ObscuredException e) {
+                Timber.e(e, "putBoolean");
+            }
+
             return this;
         }
 
         @Override
         public Editor putFloat(String key, float value) {
-            delegate.putString(key, encrypt(Float.toString(value)));
+            try {
+                String encrypt = encrypt(Float.toString(value));
+                delegate.putString(key, encrypt);
+            } catch (ObscuredException e) {
+                Timber.e(e, "putFloat");
+            }
+
             return this;
         }
 
         @Override
         public Editor putInt(String key, int value) {
-            delegate.putString(key, encrypt(Integer.toString(value)));
+            try {
+                String encrypt = encrypt(Integer.toString(value));
+                delegate.putString(key, encrypt);
+            } catch (ObscuredException e) {
+                Timber.e(e, "putInt");
+            }
+
             return this;
         }
 
         @Override
         public Editor putLong(String key, long value) {
-            delegate.putString(key, encrypt(Long.toString(value)));
+            try {
+                String encrypt = encrypt(Long.toString(value));
+                delegate.putString(key, encrypt);
+            } catch (ObscuredException e) {
+                Timber.e(e, "putLong");
+            }
+
             return this;
         }
 
         @Override
         public Editor putString(String key, String value) {
-            delegate.putString(key, encrypt(value));
+            try {
+                String encrypt = encrypt(value);
+                delegate.putString(key, encrypt);
+            } catch (ObscuredException e) {
+                Timber.e(e, "putString");
+            }
+
             return this;
         }
 
@@ -74,7 +105,13 @@ public class ObscuredSharedPreferences implements SharedPreferences {
             if (v != null && !v.isEmpty()) {
                 Set<String> encrypted = new HashSet<>(v.size());
                 for (String val : v) {
-                    encrypted.add(encrypt(val));
+                    try {
+                        String encrypt = encrypt(val);
+                        encrypted.add(encrypt);
+                    } catch (ObscuredException e) {
+                        Timber.e(e, "putStringSet");
+                    }
+
                 }
                 delegate.putStringSet(s, encrypted);
             }
@@ -118,31 +155,70 @@ public class ObscuredSharedPreferences implements SharedPreferences {
     @Override
     public boolean getBoolean(String key, boolean defValue) {
         final String v = delegate.getString(key, null);
-        return v != null ? Boolean.parseBoolean(decrypt(v)) : defValue;
+        if (v != null) {
+            try {
+                String decrypt = decrypt(v);
+                return Boolean.parseBoolean(decrypt);
+            } catch (ObscuredException e) {
+                Timber.e(e, "getBoolean");
+            }
+        }
+        return defValue;
     }
 
     @Override
     public float getFloat(String key, float defValue) {
         final String v = delegate.getString(key, null);
-        return v != null ? Float.parseFloat(decrypt(v)) : defValue;
+        if (v != null) {
+            try {
+                String decrypt = decrypt(v);
+                return Float.parseFloat(decrypt);
+            } catch (ObscuredException e) {
+                Timber.e(e, "getFloat");
+            }
+        }
+        return defValue;
     }
 
     @Override
     public int getInt(String key, int defValue) {
         final String v = delegate.getString(key, null);
-        return v != null ? Integer.parseInt(decrypt(v)) : defValue;
+        if (v != null) {
+            try {
+                String decrypt = decrypt(v);
+                return Integer.parseInt(decrypt);
+            } catch (ObscuredException e) {
+                Timber.e(e, "getInt");
+            }
+        }
+        return defValue;
     }
 
     @Override
     public long getLong(String key, long defValue) {
         final String v = delegate.getString(key, null);
-        return v != null ? Long.parseLong(decrypt(v)) : defValue;
+        if (v != null) {
+            try {
+                String decrypt = decrypt(v);
+                return Long.parseLong(decrypt);
+            } catch (ObscuredException e) {
+                Timber.e(e, "getLong");
+            }
+        }
+        return defValue;
     }
 
     @Override
     public String getString(String key, String defValue) {
         final String v = delegate.getString(key, null);
-        return v != null ? decrypt(v) : defValue;
+        if (v != null) {
+            try {
+                return decrypt(v);
+            } catch (ObscuredException e) {
+                Timber.e(e, "getString");
+            }
+        }
+        return defValue;
     }
 
     @Override
@@ -152,8 +228,13 @@ public class ObscuredSharedPreferences implements SharedPreferences {
         if (v != null && !v.isEmpty()) {
             Set<String> decrypted = new HashSet<>(v.size());
             for (String val : v) {
-                decrypted.add(decrypt(val));
+                try {
+                    decrypted.add(decrypt(val));
+                } catch (ObscuredException e) {
+                    Timber.e(e, "getStringSet");
+                }
             }
+            return decrypted;
         }
         return defValue;
     }
@@ -174,7 +255,7 @@ public class ObscuredSharedPreferences implements SharedPreferences {
     }
 
 
-    protected String encrypt(String value) {
+    protected String encrypt(String value) throws ObscuredException {
 
         try {
             final byte[] bytes = value != null ? value.getBytes(UTF8) : new byte[0];
@@ -185,12 +266,13 @@ public class ObscuredSharedPreferences implements SharedPreferences {
             return new String(Base64.encode(pbeCipher.doFinal(bytes), Base64.NO_WRAP), UTF8);
 
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            Timber.e(e, "encrypt failed");
+            throw new ObscuredException(e);
         }
 
     }
 
-    protected String decrypt(String value) {
+    protected String decrypt(String value) throws ObscuredException {
         try {
             final byte[] bytes = value != null ? Base64.decode(value, Base64.DEFAULT) : new byte[0];
             SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("PBEWithMD5AndDES");
@@ -200,7 +282,8 @@ public class ObscuredSharedPreferences implements SharedPreferences {
             return new String(pbeCipher.doFinal(bytes), UTF8);
 
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            Timber.e(e, "decrypt failed");
+            throw new ObscuredException(e);
         }
     }
 

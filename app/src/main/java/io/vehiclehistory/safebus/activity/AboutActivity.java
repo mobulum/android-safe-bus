@@ -4,10 +4,15 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import butterknife.BindString;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import io.vehiclehistory.safebus.BuildConfig;
 import io.vehiclehistory.safebus.R;
 
@@ -15,14 +20,34 @@ public class AboutActivity extends BaseActivity {
 
     public static final String MAILTO_URI_PART = "mailto";
 
-    private Toolbar toolbar;
-    private TextView applicationVersionTextView;
-    private Button contactButton;
+    @BindString(R.string.app_name)
+    protected String appName;
+
+    @BindString(R.string.contact_email)
+    protected String contactEmail;
+
+    @BindString(R.string.about_contact)
+    protected String aboutContact;
+
+    @BindString(R.string.about_application_version)
+    protected String aboutApplicationVersion;
+
+    @BindView(R.id.toolbar)
+    protected Toolbar toolbar;
+
+    @BindView(R.id.application_version_text_view)
+    protected TextView applicationVersionTextView;
+
+    @BindView(R.id.contact_developer_button)
+    protected Button contactButton;
+
+    private Unbinder unbinder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
+        unbinder = ButterKnife.bind(this);
         bindViews();
         setToolbar();
         setupContactButton();
@@ -40,10 +65,8 @@ public class AboutActivity extends BaseActivity {
     }
 
     private void bindViews() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        applicationVersionTextView = (TextView) findViewById(R.id.application_version_text_view);
-        applicationVersionTextView.setText(getResources().getString(R.string.about_application_version) + " " + BuildConfig.VERSION_NAME);
-        contactButton = (Button) findViewById(R.id.contact_developer_button);
+        String version = TextUtils.join(" ", new String[]{aboutApplicationVersion, BuildConfig.VERSION_NAME});
+        applicationVersionTextView.setText(version);
     }
 
     private void setupContactButton() {
@@ -51,11 +74,19 @@ public class AboutActivity extends BaseActivity {
 
             @Override
             public void onClick(View v) {
-                Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
-                        MAILTO_URI_PART, getString(R.string.contact_email), null));
-                emailIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name));
-                startActivity(Intent.createChooser(emailIntent, getResources().getString(R.string.about_contact)));
+                Intent emailIntent = new Intent(
+                        Intent.ACTION_SENDTO,
+                        Uri.fromParts(MAILTO_URI_PART, contactEmail, null)
+                );
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, appName);
+                startActivity(Intent.createChooser(emailIntent, aboutContact));
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbinder.unbind();
     }
 }

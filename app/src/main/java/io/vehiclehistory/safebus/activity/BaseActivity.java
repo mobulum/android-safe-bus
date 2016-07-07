@@ -9,7 +9,7 @@ import io.vehiclehistory.safebus.injection.component.DaggerActivityComponent;
 import io.vehiclehistory.safebus.injection.module.ActivityModule;
 
 
-public class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity {
 
     private ActivityComponent component;
 

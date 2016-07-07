@@ -11,6 +11,7 @@
         android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
         <activity
@@ -43,7 +44,7 @@
 
         <meta-data
             android:name="io.fabric.ApiKey"
-            android:value="3a5720c6a83a90a26a5c16acfc61b6e6d0a3e423" />
+            android:value="fe2930de29d3bda835dc3ed375ffc52495285ae0" />
 
     </application>
 

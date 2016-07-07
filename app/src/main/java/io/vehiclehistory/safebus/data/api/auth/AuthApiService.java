@@ -8,7 +8,7 @@ import retrofit2.http.POST;
 import rx.Observable;
 
 public interface AuthApiService {
-    public static final String OAUTH_TOKEN = "/oauth/token";
+    String OAUTH_TOKEN = "/oauth/token";
 
     @Headers({
             "Accept: application/json"

@@ -1,8 +1,7 @@
 package io.vehiclehistory.safebus.data;
 
 import android.content.SharedPreferences;
-
-import org.apache.commons.lang3.StringUtils;
+import android.text.TextUtils;
 
 import javax.inject.Inject;
 
@@ -43,7 +42,7 @@ public class AuthProvider implements AuthMvpView {
         String refreshToken = session.getRefreshToken();
         Timber.d("getNewSession: refreshToken: %s", refreshToken);
 
-        if (StringUtils.isEmpty(refreshToken)) {
+        if (TextUtils.isEmpty(refreshToken)) {
             getNewSessionFromPassword(this, onFinishedListener);
         } else {
             getNewSessionFromRefreshToken(refreshToken, this, onFinishedListener);
