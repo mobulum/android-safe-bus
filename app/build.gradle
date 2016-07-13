@@ -21,8 +21,8 @@ android {
         applicationId "io.vehiclehistory.safebus.android"
         minSdkVersion 15
         targetSdkVersion 24
-        versionCode 1010
-        versionName "1.1.0"
+        versionCode 1011
+        versionName "1.1.1"
         buildConfigField "boolean", "USE_CRASHLYTICS", "false"
 
         buildConfigField 'String', 'SHARED_PREFS_PASSWORD', '"' + getSharedPrefsPassword() + '"'
@@ -66,12 +66,12 @@ configurations {
 dependencies {
     final SUPPORT_LIBRARY_VERSION = '24.0.0'
     final RETROFIT_VERSION = '2.1.0'
-    final OKHTTP_VERSION = '3.4.0'
+    final OKHTTP_VERSION = '3.4.1'
     final DAGGER_VERSION = '2.5'
     final TIMBER_VERSION = '4.1.2'
     final RXANDROID_VERSION = '1.2.1'
-    final RXJAVA_VERSION = '1.1.6'
-    final BUTTERKNIFE_VERSION = '8.1.0'
+    final RXJAVA_VERSION = '1.1.7'
+    final BUTTERKNIFE_VERSION = '8.2.1'
     final TOASTER_VERSION = '0.3.0'
 
     def daggerCompiler = "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
