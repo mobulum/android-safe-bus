@@ -41,7 +41,12 @@ public class AuthFromRefreshTokenCaller {
         this.refreshToken = refreshToken;
         this.authMvpView = authMvpView;
         this.finishedListener = finishedListener;
+        resetRetry();
         preCall();
+    }
+
+    protected void resetRetry() {
+        retry = 0;
     }
 
     private void preCall() {

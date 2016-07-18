@@ -38,7 +38,12 @@ public class AuthFromPasswordCaller {
     public void auth(AuthMvpView authMvpView, OnAuthCallback finishedListener) {
         this.authMvpView = authMvpView;
         this.finishedListener = finishedListener;
+        resetRetry();
         preCall();
+    }
+
+    protected void resetRetry() {
+        retry = 0;
     }
 
     private void preCall() {
