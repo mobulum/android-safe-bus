@@ -5,22 +5,13 @@ apply plugin: 'com.neenbedankt.android-apt'
 apply from: 'credentials.gradle'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "23.0.3"
-
-    signingConfigs {
-        release {
-            storeFile file(System.getenv("ANDROID_KEY_STORE_FILE"))
-            storePassword System.getenv("ANDROID_KEY_STORE_PASSWORD")
-            keyAlias System.getenv("ANDROID_KEY_STORE_SAFEBUS_KEY_ALIAS")
-            keyPassword System.getenv("ANDROID_KEY_STORE_SAFEBUS_KEY_PASSWORD")
-        }
-    }
+    compileSdkVersion 25
+    buildToolsVersion "25.0.1"
 
     defaultConfig {
         applicationId "io.vehiclehistory.safebus.android"
         minSdkVersion 15
-        targetSdkVersion 24
+        targetSdkVersion 25
         versionCode 1011
         versionName "1.1.1"
         buildConfigField "boolean", "USE_CRASHLYTICS", "false"
@@ -36,12 +27,10 @@ android {
         debug {
             applicationIdSuffix ".debug"
             versionNameSuffix " Debug"
-            debuggable true
         }
 
         release {
             minifyEnabled true
-            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField "boolean", "USE_CRASHLYTICS", "true"
         }
@@ -64,14 +53,14 @@ configurations {
 }
 
 dependencies {
-    final SUPPORT_LIBRARY_VERSION = '24.1.0'
+    final SUPPORT_LIBRARY_VERSION = '25.0.1'
     final RETROFIT_VERSION = '2.1.0'
-    final OKHTTP_VERSION = '3.4.1'
-    final DAGGER_VERSION = '2.5'
-    final TIMBER_VERSION = '4.1.2'
+    final OKHTTP_VERSION = '3.4.2'
+    final DAGGER_VERSION = '2.8'
+    final TIMBER_VERSION = '4.3.1'
     final RXANDROID_VERSION = '1.2.1'
-    final RXJAVA_VERSION = '1.1.7'
-    final BUTTERKNIFE_VERSION = '8.2.1'
+    final RXJAVA_VERSION = '1.2.3'
+    final BUTTERKNIFE_VERSION = '8.4.0'
     final TOASTER_VERSION = '0.3.0'
 
     def daggerCompiler = "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
